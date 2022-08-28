@@ -1,16 +1,19 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sjk/Homepage/Sign-up.dart';
 class MainDrawer extends StatelessWidget {
   const MainDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
+    return
+      Drawer(
       child: Column(
         children: [
           Container(
             width: double.infinity,
             padding: EdgeInsets.all(20),
-            color: Theme.of(context).primaryColor,
+            color: Color(0xff01579B),
             child: Center(
               child: Column(
                 children: [
@@ -22,7 +25,7 @@ class MainDrawer extends StatelessWidget {
                       shape: BoxShape.circle,image: DecorationImage(image: AssetImage(''),fit: BoxFit.fill)
                     ),
                   ),
-                  Text('SJK CONSTRUCTIONS',style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold,color: Colors.white),)
+                  Text('ABC CONSTRUCTIONS',style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold,color: Colors.white),)
                 ],
               ),
             ),
@@ -31,10 +34,7 @@ class MainDrawer extends StatelessWidget {
             leading: Icon(Icons.home),
             title: Text('Home',style: TextStyle(fontSize: 18),),
           ),
-          ListTile(
-            leading: Icon(Icons.star),
-            title: Text('Starred',style: TextStyle(fontSize: 18),),
-          ),
+
           ListTile(
             leading: Icon(Icons.file_copy_sharp),
             title: Text('Plan Documents',style: TextStyle(fontSize: 18),),
@@ -43,13 +43,15 @@ class MainDrawer extends StatelessWidget {
             leading: Icon(Icons.settings),
             title: Text('Settings',style: TextStyle(fontSize: 18),),
           ),
-          ListTile(
-            leading: Icon(Icons.photo_library_rounded),
-            title: Text('Completed Works',style: TextStyle(fontSize: 18),),
-          ),
-          ListTile(
-            leading: Icon(Icons.logout),
-            title: Text('Logout',style: TextStyle(fontSize: 18),),
+
+          GestureDetector(
+            onTap: (){
+              FirebaseAuth.instance.signOut().whenComplete(() => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Signup())));
+            },
+            child: ListTile(
+              leading: Icon(Icons.logout),
+              title: Text('Logout',style: TextStyle(fontSize: 18),),
+            ),
           )
         ],
       ),
