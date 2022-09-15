@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:sjk/Payment/Income.dart';
 import 'package:sjk/Payment/payment.dart';
 
 import 'Expense.dart';
@@ -13,16 +14,11 @@ class Expense_service extends StatefulWidget {
 
 class _Expense_serviceState extends State<Expense_service> {
 
-  List<List<dynamic>> data =[];
+  List data =[];
   Future<void> fetchdata()async {
     var Collection=await FirebaseFirestore.instance.collection("expense").get();
-    Collection.docs.map((e)  {
-      List<String> dynamic=[];
-      dynamic.add(e["Amount"]);
-      dynamic.add(e["Date"]);
-      dynamic.add(e["Description"]);
-      data.add(dynamic);
-    });
+
+    data=Collection.docs;
   }
   bool service=false;
   @override
@@ -31,6 +27,8 @@ class _Expense_serviceState extends State<Expense_service> {
     fetchdata().whenComplete(() {
       setState((){
         service=true;
+
+        print(data);
       });
     });
 

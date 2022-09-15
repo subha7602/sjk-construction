@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:sjk/Payment/payment.dart';
+import 'package:provider/provider.dart';
 import 'package:sjk/Tasks/task.dart';
-
+import 'package:sjk/Tasks/progress_indicator.dart';
 class Tasklist extends StatefulWidget {
   const Tasklist({Key? key}) : super(key: key);
 
@@ -304,21 +304,43 @@ class _TasklistState extends State<Tasklist> {
                       ),
                     ),
 
-                child: Row(
+                child:Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                        padding: EdgeInsets.only(left: 10),
-                        child: Text('PROGRESS')),
-                    SizedBox(height: 38, width: 80),
+                        padding: EdgeInsets.zero,
+                        child: Text(
+                          'Progress',
+                          style: TextStyle(fontSize: 18),
+                        )),
+                    SizedBox(height: 38, width: 120),
                     Row(
                       children: [
-                        Container(
-                            padding: EdgeInsets.symmetric(horizontal: 10),
-                            child: Icon(Icons.add_circle_outlined)),
-                        Container(child: Text('Progress')),
-                        Container(
-                            padding: EdgeInsets.symmetric(horizontal: 10),
-                            child: Icon(Icons.remove_circle))
+                        GestureDetector(
+                          onTap: (){
+                            context.read<Shift>().incvalue();
+                            setState((){
+
+                            });
+
+
+                          },
+                          child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              child: Icon(Icons.add_circle_outlined)),
+                        ),
+                        Container(child: Text(context.watch<Shift>().value.toString())),
+                        GestureDetector(
+                            onTap: (){
+                              context.read<Shift>().decvalue();
+                              setState((){
+
+                              });
+                            },
+                            child:Container(
+                                padding: EdgeInsets.symmetric(horizontal: 10),
+                                child: Icon(Icons.remove_circle))
+                        )
                       ],
                     ),
                   ],
@@ -383,4 +405,5 @@ class _TasklistState extends State<Tasklist> {
               ),
             ])));
   }
+
 }

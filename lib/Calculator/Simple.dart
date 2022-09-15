@@ -9,6 +9,9 @@ class Simple extends StatefulWidget {
 }
 
 class _SimpleState extends State<Simple> {
+  TextEditingController num1controller = new TextEditingController();
+  TextEditingController num2controller = new TextEditingController();
+  String result = "0";
   TextEditingController dateInput = TextEditingController();
   String value = "Duration";
   List<String> items = ["Duration", "3 months", "4 months", "6 months","9 months","1 year"];
@@ -79,6 +82,8 @@ padding: EdgeInsets.only(top: 10.0,left: 15,right: 10,bottom: 5),
 
                                   child: TextFormField(
                                     cursorColor: Color(0xff01579B),
+                                    controller: num1controller,
+
                                     keyboardType: TextInputType.number,
                                     decoration: new InputDecoration(
                                         border: InputBorder.none,
@@ -142,6 +147,7 @@ padding: EdgeInsets.only(top: 10.0,left: 15,right: 10,bottom: 5),
                                   child: TextFormField(
                                     cursorColor: Color(0xff01579B),
                                     keyboardType: TextInputType.number,
+                                    controller: num2controller,
                                     decoration: new InputDecoration(
                                         border: InputBorder.none,
                                         focusedBorder: InputBorder.none,
@@ -151,6 +157,7 @@ padding: EdgeInsets.only(top: 10.0,left: 15,right: 10,bottom: 5),
                                         contentPadding: EdgeInsets.only(
                                             left: 15, bottom: 11, top: 11, right: 15),
                                         hintText: "Enter value"),
+
                                   )),
                             ),
                             Expanded(
@@ -171,7 +178,8 @@ padding: EdgeInsets.only(top: 10.0,left: 15,right: 10,bottom: 5),
                           children: [
                             Expanded(
                               flex:3,
-                              child: Container(
+                              child:
+                              Container(
                                 padding: EdgeInsets.only(top:20,bottom: 20,left: 10,),
                                 child: Text(
                                   'Duration',style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w400),
@@ -200,7 +208,8 @@ padding: EdgeInsets.only(top: 10.0,left: 15,right: 10,bottom: 5),
                                       bottomRight: Radius.circular(5),
                                     ),
                                   ),
-                                  child: DropdownButton(
+                                  child:
+                                  DropdownButton(
                                       value: value,
                                       items: items.map((String items) {
                                         return DropdownMenuItem(
@@ -233,7 +242,13 @@ padding: EdgeInsets.only(top: 10.0,left: 15,right: 10,bottom: 5),
                     ],
           ),
                  ),
-                 Container(
+                 GestureDetector(
+                   onTap: (){
+                     setState(() {
+                       int sum = int.parse(num1controller.text) * int.parse(num2controller.text);
+                       result = sum.toString();
+                     });
+                   },
                    child: Center(
                        child: Container(
                            margin: EdgeInsets.only(top:60),
@@ -256,6 +271,9 @@ padding: EdgeInsets.only(top: 10.0,left: 15,right: 10,bottom: 5),
                                    color: Colors.white
                                )))),
                  ),
+
+
+                 Text('Result : $result'),
                ],
              ),
            ),

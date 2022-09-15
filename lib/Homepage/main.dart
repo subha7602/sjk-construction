@@ -59,7 +59,7 @@ class _FireBaseInitializationState extends State<FireBaseInitialization> {
 
                       User? _user = streamSnapshot.data as User?;
                       if (_user == null) {
-                        return Signup();
+                        return Homepage();
                       } else {
                         return Homepage();
                       }

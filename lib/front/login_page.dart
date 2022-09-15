@@ -203,6 +203,21 @@ class _LoginState extends State<Login> {
                               hintText: 'Enter Password'
                           ),
                         )),
+
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.pushReplacement(
+                            context, MaterialPageRoute(builder: (_) => Forgot()));
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(top:12.0,left: 200),
+                        child: Align(alignment:Alignment.center ,
+                          child: Text('Forgot Password?'
+                            ,style: TextStyle(
+                              color:Color(0xff1248a3),),),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -230,20 +245,6 @@ class _LoginState extends State<Login> {
                       ),
                       child: Center(child: Text('LOG-IN',style:TextStyle(color: Colors.white,fontWeight: FontWeight.w500))),
                     ),
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: (){
-                  Navigator.pushReplacement(
-                      context, MaterialPageRoute(builder: (_) => Forgot()));
-                },
-                child: Padding(
-                  padding: const EdgeInsets.only(top:12.0),
-                  child: Align(alignment:Alignment.center ,
-                    child: Text('Forgot Password?'
-                        ,style: TextStyle(
-                        color:Color(0xff1248a3),),),
                   ),
                 ),
               ),

@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sjk/Homepage/Homepage.dart';
 import 'package:sjk/Homepage/Sign-up.dart';
+import 'package:sjk/Homepage/insert_bill.dart';
 class MainDrawer extends StatelessWidget {
   const MainDrawer({Key? key}) : super(key: key);
 
@@ -30,20 +32,34 @@ class MainDrawer extends StatelessWidget {
               ),
             ),
           ),
-          ListTile(
-            leading: Icon(Icons.home),
-            title: Text('Home',style: TextStyle(fontSize: 18),),
+          GestureDetector(
+              onTap: (){
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Homepage()));
+              },
+            child: ListTile(
+              leading: Icon(Icons.home),
+              title: Text('Home',style: TextStyle(fontSize: 18),),
+            ),
           ),
 
-          ListTile(
-            leading: Icon(Icons.file_copy_sharp),
-            title: Text('Plan Documents',style: TextStyle(fontSize: 18),),
-          ),
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Settings',style: TextStyle(fontSize: 18),),
+          GestureDetector(onTap: (){
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>ImageLoad()));
+          },
+            child: ListTile(
+              leading: Icon(Icons.file_copy_sharp),
+              title: Text('Plan Documents',style: TextStyle(fontSize: 18),),
+            ),
           ),
 
+          GestureDetector(
+            onTap: (){
+               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>ImageLoad()));
+            },
+            child: ListTile(
+              leading: Icon(Icons.logout),
+              title: Text('Insert Bills',style: TextStyle(fontSize: 18),),
+            ),
+          ),
           GestureDetector(
             onTap: (){
               FirebaseAuth.instance.signOut().whenComplete(() => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Signup())));

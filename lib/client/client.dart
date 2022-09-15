@@ -39,58 +39,66 @@ class _Data1State extends State<Data1> {
                   color: Colors.white,
                   fontWeight: FontWeight.bold),
             )),
-        body: Container(
-          //
-          // Figma Flutter Generator Rectangle4Widget - RECTANGLE
-            margin: EdgeInsets.all(20),
-            height: 52,
-            width: 350,
-            decoration: BoxDecoration(
-              color: Colors.white10,
-              border: Border.all(width: 1, color: Colors.black),
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(15),
-                topRight: Radius.circular(15),
-                bottomLeft: Radius.circular(15),
-                bottomRight: Radius.circular(15),
-              ),
-            ),
-            child:TextFormField(
-              cursorColor: Colors.black,
-              keyboardType: inputType,
-              decoration: new InputDecoration(
-                  border: InputBorder.none,
-                  focusedBorder: InputBorder.none,
-                  enabledBorder: InputBorder.none,
-                  errorBorder: InputBorder.none,
-                  disabledBorder: InputBorder.none,
-                  contentPadding:
-                  EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
-                  hintText: "Search",
-                  prefixIcon: Icon(Icons.search)),
-            )
-        ),
-        bottomNavigationBar:
+        body:Column(
+          children: [
             Container(
-          margin: EdgeInsets.all(20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              RaisedButton(
-                color: Color(0xff01579B),
-                child: Text(
-                  'ADD NEW CLIENT +',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold),
+              //
+              // Figma Flutter Generator Rectangle4Widget - RECTANGLE
+                margin: EdgeInsets.all(20),
+                height: 52,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+
+                  border: Border.all(width: 1, color: Colors.black),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(15),
+                    topRight: Radius.circular(15),
+                    bottomLeft: Radius.circular(15),
+                    bottomRight: Radius.circular(15),
+
+                  ),
                 ),
-                onPressed: () => _onButtonPressed(),
+                child: TextFormField(
+                  cursorColor: Colors.black,
+                  keyboardType: inputType,
+                  decoration: new InputDecoration(
+                      border: InputBorder.none,
+
+                      contentPadding: EdgeInsets.only(
+                          left: 15, bottom: 11, top: 11, right: 15),
+                      hintText: "Search",
+                      prefixIcon: Icon(Icons.search)),
+                )
+               ),
+            SizedBox(
+              height: 550,
+              child: Container(
+                margin: EdgeInsets.all(20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    RaisedButton(
+                      color: Color(0xff01579B),
+                      child: Text(
+                        'ADD NEW CLIENT +',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      onPressed: () => _onButtonPressed(),
+                    ),
+                  ],
+                ),
               ),
-            ],
-          ),
-        ));
+            )
+
+          ],
+        ),
+
+
+           );
   }
 
   _onButtonPressed() {

@@ -5,13 +5,15 @@ import 'package:sjk/Attendence/shift_increaser.dart';
 import 'attendence.dart';
 
 class Present extends StatefulWidget {
-  const Present({Key? key}) : super(key: key);
+   Present({Key? key}) : super(key: key);
 
   @override
   State<Present> createState() => _PresentState();
 }
 
 class _PresentState extends State<Present> {
+  String value = "Worker Type";
+  List<String> items = ["Worker Type", "Electrician", "Plumber", "Mason","Labour","Carpenter"];
   @override
   Widget build(BuildContext context) {
     var inputType;
@@ -156,19 +158,21 @@ class _PresentState extends State<Present> {
                         bottomRight: Radius.circular(5),
                       ),
                     ),
-                    child: TextFormField(
-                      cursorColor: Color(0xff01579B),
-                      keyboardType: inputType,
-                      decoration: new InputDecoration(
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          enabledBorder: InputBorder.none,
-                          errorBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none,
-                          contentPadding: EdgeInsets.only(
-                              left: 15, bottom: 11, top: 11, right: 15),
-                          hintText: "Worker Type*"),
-                    )),
+                    child: DropdownButton(
+                        value: value,
+                        items: items.map((String items) {
+                          return DropdownMenuItem(
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Text(items),
+                              ), value: items);
+                        }).toList(),
+                        onChanged: (String? subha) {
+                          setState(() {
+                            value = subha!;
+                          });
+                        })
+            ),
                 Container(
                     //
                     // Figma Flutter Generator Rectangle4Widget - RECTANGLE

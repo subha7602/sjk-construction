@@ -7,6 +7,7 @@ import '../Tasks/Worker.dart';
 class Data4 extends StatefulWidget {
   const Data4({Key? key}) : super(key: key);
 
+
   @override
   State<Data4> createState() => _Data4State();
 }
@@ -38,10 +39,6 @@ class _Data4State extends State<Data4> {
           )),
     body: Column(
       children: [
-        SizedBox(
-          height: 100,
-          width: 350,
-        ),
         Container(
           //
           // Figma Flutter Generator Rectangle4Widget - RECTANGLE

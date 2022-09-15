@@ -230,8 +230,10 @@ class _Add_IncomeState extends State<Add_Income> {
                           contentPadding: EdgeInsets.only(
                               left: 15, bottom: 11, top: 11, right: 15),
                           hintText: "Description*"),
-                    ))
+                    )),
+
               ]),
+
             ),
           ),
           bottomNavigationBar: Container(

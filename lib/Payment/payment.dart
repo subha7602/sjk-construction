@@ -70,7 +70,7 @@ class _Data5State extends State<Data5> with TickerProviderStateMixin {
                   borderRadius: BorderRadius.circular(
                     25.0,
                   ),
-                  color: Colors.green,
+                  color: Color(0xff01579B),
                 ),
                 labelColor: Colors.white,
                   unselectedLabelColor: Colors.black,

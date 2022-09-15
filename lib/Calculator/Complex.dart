@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sjk/Calculator/calculator.dart';
 class Complex extends StatefulWidget {
@@ -10,6 +9,17 @@ class Complex extends StatefulWidget {
 }
 
 class _ComplexState extends State<Complex> {
+  TextEditingController num1controller = new TextEditingController();
+  TextEditingController num2controller = new TextEditingController();
+  TextEditingController num3controller = new TextEditingController();
+  TextEditingController num4controller = new TextEditingController();
+  TextEditingController num5controller = new TextEditingController();
+  TextEditingController num6controller = new TextEditingController();
+  TextEditingController num7controller = new TextEditingController();
+  TextEditingController num8controller = new TextEditingController();
+  TextEditingController num9controller = new TextEditingController();
+
+  String result = "0";
   TextEditingController dateInput = TextEditingController();
   String value = "Duration";
   List<String> items = ["Duration", "3 months", "4 months", "6 months","9 months","1 year"];
@@ -79,6 +89,7 @@ resizeToAvoidBottomInset: false,
                                 ),
 
                                 child: TextFormField(
+                                  controller: num1controller,
                                   cursorColor: Color(0xff01579B),
                                   keyboardType: TextInputType.number,
                                   decoration: new InputDecoration(
@@ -140,7 +151,7 @@ resizeToAvoidBottomInset: false,
                               ),
 
                               child: TextFormField(
-
+                                controller: num2controller,
                                 cursorColor: Color(0xff01579B),
                                 keyboardType: TextInputType.number,
                                 decoration: new InputDecoration(
@@ -198,6 +209,7 @@ resizeToAvoidBottomInset: false,
                                 ),
 
                                 child: TextFormField(
+                                  controller: num3controller,
                                   cursorColor: Color(0xff01579B),
                                   keyboardType: TextInputType.number,
                                   decoration: new InputDecoration(
@@ -259,7 +271,7 @@ flex: 8,                      child: Row(
                                 ),
 
                                 child: TextFormField(
-
+                                  controller: num4controller,
                                   cursorColor: Color(0xff01579B),
                                   keyboardType: TextInputType.number,
                                   decoration: new InputDecoration(
@@ -322,7 +334,7 @@ flex: 8,                      child: Row(
                                 ),
 
                                 child: TextFormField(
-
+                                  controller: num5controller,
                                   cursorColor: Color(0xff01579B),
                                   keyboardType: TextInputType.number,
                                   decoration: new InputDecoration(
@@ -385,7 +397,7 @@ flex: 8,                      child: Row(
                                 ),
 
                                 child: TextFormField(
-
+                                  controller: num6controller,
                                   cursorColor: Color(0xff01579B),
                                   keyboardType: TextInputType.number,
                                   decoration: new InputDecoration(
@@ -448,7 +460,7 @@ flex: 8,                      child: Row(
                                 ),
 
                                 child: TextFormField(
-
+                                  controller: num7controller,
                                   cursorColor: Color(0xff01579B),
                                   keyboardType: TextInputType.number,
                                   decoration: new InputDecoration(
@@ -511,7 +523,7 @@ flex: 8,                      child: Row(
                                 ),
 
                                 child: TextFormField(
-
+                                  controller: num8controller,
                                   cursorColor: Color(0xff01579B),
                                   keyboardType: TextInputType.number,
                                   decoration: new InputDecoration(
@@ -605,10 +617,24 @@ flex: 8,                      child: Row(
                   ],
                 ),
               ),
-              Container(
+
+              GestureDetector(
+                onTap: (){
+                  setState(() {
+                    double cement = double.parse(num1controller.text) *0.4;
+                    double sand = double.parse(num1controller.text) * 1.8;
+                    double steel = double.parse(num1controller.text) * 0.944 ;
+                    int paint= int.parse(num1controller.text) * 4;
+                    int brick = int.parse(num1controller.text) * 5;
+                    int tiles = int.parse(num1controller.text) * 30;
+                    int windows = int.parse(num1controller.text) * 45;
+                    num sum = cement+sand+steel+paint+brick+tiles+windows;
+                    result = sum.toString();
+                  });
+                },
                 child: Center(
                     child: Container(
-                        margin: EdgeInsets.only(top:40,bottom: 40),
+                        margin: EdgeInsets.only(top:60),
                         height: 50,
                         width: 170,
                         decoration: BoxDecoration(
@@ -628,6 +654,8 @@ flex: 8,                      child: Row(
                                 color: Colors.white
                             )))),
               ),
+
+              Text('Result : $result'),
             ],
           ),
         ),
