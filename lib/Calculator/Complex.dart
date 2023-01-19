@@ -33,8 +33,13 @@ resizeToAvoidBottomInset: false,
         SingleChildScrollView(
           child: Column(
             children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text('Net Amount: $result',style:TextStyle(fontSize: 20,fontWeight: FontWeight.w500,color: Color(0xff01579B),
+                )),
+              ),
               Container(
-                margin: EdgeInsets.only(top:30,left: 20,right: 20,),
+                margin: EdgeInsets.only(left: 20,right: 20,),
                 //padding: EdgeInsets.only(top: 25),
                 height: 800,
                 width: MediaQuery.of(context).size.width,

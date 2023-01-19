@@ -1,11 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'material-service.dart';
 import 'material.dart';
 
 import 'package:intl/intl.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class Info extends StatefulWidget {
-  const Info({Key? key}) : super(key: key);
+  final List data;
+  const Info({Key? key, required this.data}) : super(key: key);
 
   @override
   State<Info> createState() => _InfoState();
@@ -13,6 +16,34 @@ class Info extends StatefulWidget {
 
 class _InfoState extends State<Info> {
   TextEditingController dateInput = new TextEditingController();
+  TextEditingController Material = new TextEditingController();
+  TextEditingController Quantity = new TextEditingController();
+  //String result = "0";
+  // int sum = int.parse(Material.text) * int.parse(Quantity.text);
+  // String result = sum.toString();
+
+  String value = "Type";
+  List<String> items = ["Type","Received","Used"];
+  void enterdata() async {
+    DocumentReference docRef =
+    FirebaseFirestore.instance.collection("material").doc();
+
+    DocumentSnapshot docSnap = await docRef.get();
+    var doc = docSnap.reference.id;
+    Map<String, String> data = {
+      "Material": Material.text,
+      "Date": dateInput.text,
+      "Quantity": Quantity.text,
+      "doc id": doc,
+    };
+    await FirebaseFirestore.instance
+        .collection("material")
+        .doc(doc)
+        .set(data)
+    // .whenComplete(() => toast('Saved Successfully', Colors.blue))
+        .whenComplete(() => Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => Material_service())));
+  }
   @override
   Widget build(BuildContext context) {
     var inputType;
@@ -22,7 +53,7 @@ class _InfoState extends State<Info> {
             leading: GestureDetector(
               onTap: () {
                 Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (_) => Data3()));
+                    context, MaterialPageRoute(builder: (_) => Material_service()));
               },
               child: Icon(
                 Icons.arrow_back,
@@ -40,7 +71,7 @@ class _InfoState extends State<Info> {
             )),
         body: Container(
           margin: EdgeInsets.only(top: 80, left: 20, right: 20),
-          height: 460,
+          height: 500,
           width: 400,
           decoration: BoxDecoration(
               color: Color(0xffe6f2ff),
@@ -94,6 +125,7 @@ class _InfoState extends State<Info> {
                       hintText: "Client Name*"),
                 )),
             Container(
+
                 //
                 // Figma Flutter Generator Rectangle4Widget - RECTANGLE
                 margin: EdgeInsets.only(right: 20, left: 20),
@@ -118,6 +150,7 @@ class _InfoState extends State<Info> {
                   ),
                 ),
                 child: TextFormField(
+                  controller: Material,
                   cursorColor: Color(0xff01579B),
                   keyboardType: inputType,
                   decoration: new InputDecoration(
@@ -234,6 +267,7 @@ class _InfoState extends State<Info> {
                       ),
                     ),
                     child: TextFormField(
+                      controller: Quantity,
                       cursorColor: Color(0xff01579B),
                       keyboardType: inputType,
                       decoration: new InputDecoration(
@@ -294,7 +328,7 @@ class _InfoState extends State<Info> {
               ],
             ),
             Container(
-                //
+
                 // Figma Flutter Generator Rectangle4Widget - RECTANGLE
                 margin: EdgeInsets.only(top: 25, right: 20, left: 20),
                 height: 52,
@@ -317,16 +351,51 @@ class _InfoState extends State<Info> {
                     bottomRight: Radius.circular(5),
                   ),
                 ),
-                child: Center(
-                    child: Text(
-               'Net Amount:',
-                  style: TextStyle(
-                    fontSize: 16,
+                child:
+                Text('Net Amount: ',style:TextStyle(fontSize: 20,fontWeight: FontWeight.w500,color: Color(0xff01579B),
+                )),
+            ),
+            Container(
+              //
+              // Figma Flutter Generator Rectangle4Widget - RECTANGLE
+                margin: EdgeInsets.only(top: 25, right: 20, left: 20),
+                height: 52,
+                width: 350,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 7,
+                    )
+                  ],
+                  color: Colors.white,
+                  border: Border.all(
+                    width: 1,
+                    color: Colors.white,
                   ),
-                ))),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(5),
+                    topRight: Radius.circular(5),
+                    bottomLeft: Radius.circular(5),
+                    bottomRight: Radius.circular(5),
+                  ),
+                ),
+                child:DropdownButton(
+                    value: value,
+                    items: items.map((String items) {
+                      return DropdownMenuItem(
+                          child: Text(items), value: items);
+                    }).toList(),
+                    onChanged: (String? subha) {
+                      setState(() {
+                        value = subha!;
+                      });
+                    })
+            ),
+
           ]),
         ),
-        bottomNavigationBar: Container(
+        bottomNavigationBar:
+        Container(
             height: 100,
             width: 300,
             color: Colors.white30,
@@ -336,12 +405,7 @@ class _InfoState extends State<Info> {
                 child: Center(
                     child: GestureDetector(
                   onTap: () {
-                    Fluttertoast.showToast(
-                        msg: "Saved Successfully",
-                        gravity: ToastGravity.CENTER,
-                        toastLength: Toast.LENGTH_LONG,
-                        backgroundColor: Color(0xff01579B),
-                        textColor: Colors.white);
+                    enterdata();
                   },
                   child: Container(
                       margin: EdgeInsets.all(20),
@@ -365,4 +429,6 @@ class _InfoState extends State<Info> {
               ),
             ])));
   }
+
 }
+

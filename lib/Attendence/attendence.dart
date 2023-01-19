@@ -2,19 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:sjk/Homepage/Homepage.dart';
 import 'Present.dart';
 
-import '../Tasks/Worker.dart';
 
 class Data4 extends StatefulWidget {
-  const Data4({Key? key}) : super(key: key);
+  var data;
+
+  Data4({Key? key, required this.data}) : super(key: key);
+
+  get data4 => null;
 
 
   @override
   State<Data4> createState() => _Data4State();
 }
 
-
-
 class _Data4State extends State<Data4> {
+
+
   @override
   Widget build(BuildContext context) {
     var inputType;
@@ -30,7 +33,6 @@ class _Data4State extends State<Data4> {
               Icons.arrow_back,
               color: Colors.white,
               size: 20,
-
             ),),
           title: Text(
             "ATTENDENCE",
@@ -40,7 +42,7 @@ class _Data4State extends State<Data4> {
     body: Column(
       children: [
         Container(
-          //
+          
           // Figma Flutter Generator Rectangle4Widget - RECTANGLE
             margin: EdgeInsets.all(20),
             height: 52,
@@ -90,19 +92,48 @@ class _Data4State extends State<Data4> {
                     children: [
                       // Figma Flutter Generator Rectangle2Widget - RECTANGLE
                       Container(
-                          width: 210,
-                          height: 75,
-                          margin: EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                            borderRadius : BorderRadius.only(
-                              topLeft: Radius.circular(12),
-                              topRight: Radius.circular(12),
-                              bottomLeft: Radius.circular(12),
-                              bottomRight: Radius.circular(12),
-                            ),
+                        width: 220,
+                        height: 73,
 
-                            color : Color.fromRGBO(255, 255, 255, 1),
-                          )
+                        decoration: BoxDecoration(
+                          color : Color.fromRGBO(217, 217, 217, 1),
+                        ),
+                        child:Column(
+                          children: [
+                            // Figma Flutter Generator Rectangle4Widget - RECTANGLE
+                            Container(
+                              width: 158,
+                              height: 32,
+                              margin: EdgeInsets.only(bottom: 9),
+                              decoration: BoxDecoration(
+                                borderRadius : BorderRadius.only(
+                                  topLeft: Radius.circular(12),
+                                  topRight: Radius.circular(12),
+                                  bottomLeft: Radius.circular(12),
+                                  bottomRight: Radius.circular(12),
+                                ),
+                                color : Color.fromRGBO(255, 255, 255, 1),
+                              ),
+                              ),
+
+
+                            // Figma Flutter Generator Rectangle4Widget - RECTANGLE
+                            Container(
+                              width: 158,
+                              height: 32,
+                              decoration: BoxDecoration(
+                                borderRadius : BorderRadius.only(
+                                  topLeft: Radius.circular(12),
+                                  topRight: Radius.circular(12),
+                                  bottomLeft: Radius.circular(12),
+                                  bottomRight: Radius.circular(12),
+                                ),
+                                color : Color.fromRGBO(255, 255, 255, 1),
+                              ),
+
+                            )
+                          ],
+                        ),
                       ),
                       // Figma Flutter Generator Rectangle10Widget - RECTANGLE
                       Container(
@@ -115,13 +146,7 @@ class _Data4State extends State<Data4> {
                         child:Column(
                           children: [
                             // Figma Flutter Generator Rectangle4Widget - RECTANGLE
-                            GestureDetector(
-                              onTap: () {
-                                //_submitform();
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => Present()));
-                              },
-                              child: Container(
+                            Container(
                                   width: 78,
                                   height: 32,
                                   margin: EdgeInsets.only(bottom: 9),
@@ -134,26 +159,31 @@ class _Data4State extends State<Data4> {
                                     ),
                                     color : Color.fromRGBO(255, 255, 255, 1),
                                   ),
-                                child: Align(
-                                    alignment:Alignment.center,child: Text('PRESENT',style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold),)),
                               ),
-                            ),
+
                             // Figma Flutter Generator Rectangle4Widget - RECTANGLE
-                            Container(
-                                width: 78,
-                                height: 32,
-                                decoration: BoxDecoration(
-                                  borderRadius : BorderRadius.only(
-                                    topLeft: Radius.circular(12),
-                                    topRight: Radius.circular(12),
-                                    bottomLeft: Radius.circular(12),
-                                    bottomRight: Radius.circular(12),
-                                  ),
-                                  color : Color.fromRGBO(255, 255, 255, 1),
-                                ),
-                              child: Align(
-                                  alignment:Alignment.center,child: Text('ABSENT',style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold),)),
-                            )
+                            // Container(
+                            //     width: 78,
+                            //     height: 32,
+                            //     decoration: BoxDecoration(
+                            //       borderRadius : BorderRadius.only(
+                            //         topLeft: Radius.circular(12),
+                            //         topRight: Radius.circular(12),
+                            //         bottomLeft: Radius.circular(12),
+                            //         bottomRight: Radius.circular(12),
+                            //       ),
+                            //       color : Color.fromRGBO(255, 255, 255, 1),
+                            //     ),
+                            //   child: Text(
+                            //     widget.data4[index]["name"],
+                            //
+                            //     style: TextStyle(
+                            //         color: Colors.black,
+                            //         fontSize: 16,
+                            //         fontWeight: FontWeight.w400),
+                            //   ),
+                            //
+                            // )
                           ],
                         ),
                       )
@@ -171,7 +201,7 @@ class _Data4State extends State<Data4> {
           onTap: () {
             //_submitform();
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => Worker()));
+                builder: (context) => Present()));
           },        child: Container(
           width: 50,
           height: 50,
@@ -192,7 +222,7 @@ class _Data4State extends State<Data4> {
               Align(
                   alignment: Alignment.center,
                   child: Text(
-                    'ADD NEW WORKER+',
+                    'ADD PRESENT+',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 18,

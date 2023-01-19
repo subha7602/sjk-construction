@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sjk/Payment/add_income.dart';
 import 'package:sjk/Payment/payment.dart';
+import 'checkbox.dart';
 
 class Income extends StatefulWidget {
   final List data;
@@ -13,48 +14,69 @@ class Income extends StatefulWidget {
 class _IncomeState extends State<Income> {
   String result = "0";
   List<String> text = ["Residential", "Non-Residential", "Others"];
-  static int _len = 10;
-  List<bool> isChecked = List.generate(_len, (index) => false);
-  String _getTitle() =>
-      "Checkbox Demo : Checked = ${isChecked.where((check) => check == true).length}, Unchecked = ${isChecked.where((check) => check == false).length}";
-  String _title = "Checkbox Demo";
+  final notifications = [
+    CheckBoxState(title: 'one'),
+    CheckBoxState(title: 'one'),
+    CheckBoxState(title: 'one'),
+    CheckBoxState(title: 'one'),
+  ];
+
+  int Amount = 0;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    for (int i = 0; i < widget.data.length; i++) {
+      setState(() {
+        Amount += int.parse(widget.data[i]["Amount"]);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var inputType;
     return Scaffold(
       body: Column(
         children: [
-          Container(
-            margin: EdgeInsets.only(top: 10, bottom: 10),
-            child: Row(
-              children: [
-                Text(
-                  'Total Income: $result',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 180.0),
-                  child: RaisedButton(
-                    color: Color(0xff01579B),
+          Expanded(
+            flex: 4,
+            child: Container(
+              margin: EdgeInsets.only(top: 10, bottom: 10),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 3,
                     child: Text(
-                      'Filters',
+                      'Total Income:' + Amount.toString(),
                       style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold),
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700),
                     ),
-                    onPressed: () => _onButtonPressed(),
                   ),
-                )
-              ],
+                  Expanded(
+                    flex: 1,
+                    child: RaisedButton(
+                      color: Color(0xff01579B),
+                      child: Text(
+                        'Filters',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      onPressed: () => _onButtonPressed(),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
           Container(
             height: 450,
-            child: ListView.builder(
+            child:
+            ListView.builder(
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
               itemBuilder: (BuildContext context, int index) {
@@ -164,26 +186,6 @@ class _IncomeState extends State<Income> {
             body: SingleChildScrollView(
               child: Column(
                 children: [
-                  ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemCount: widget.data.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        //title: Text(text),
-                        trailing: CheckboxListTile(
-                            onChanged: (checked) {
-                              setState(
-                                () {
-                                  isChecked[index] = checked!;
-                                  _title = _getTitle();
-                                },
-                              );
-                            },
-                            value: isChecked[index]),
-                      );
-                    },
-                  ),
                   Center(
                       child: GestureDetector(
                     onTap: () {

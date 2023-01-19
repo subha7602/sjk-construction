@@ -25,6 +25,8 @@ class _SimpleState extends State<Simple> {
            SingleChildScrollView(
              child: Column(
                children: [
+                 Text('Net Amount: $result',style:TextStyle(fontSize: 20,fontWeight: FontWeight.w500,color: Color(0xff01579B),
+                 )),
                  Container(
                    margin: EdgeInsets.only(top:50,left: 20,right: 20,),
 padding: EdgeInsets.only(top: 10.0,left: 15,right: 10,bottom: 5),
@@ -273,7 +275,7 @@ padding: EdgeInsets.only(top: 10.0,left: 15,right: 10,bottom: 5),
                  ),
 
 
-                 Text('Result : $result'),
+
                ],
              ),
            ),

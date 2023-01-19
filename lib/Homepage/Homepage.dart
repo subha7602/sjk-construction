@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:sjk/Tasks/Task_service.dart';
 import 'package:sjk/client/client.dart';
 import 'package:sjk/Payment/income_service.dart';
 import 'package:sjk/Payment/payment.dart';
 import 'package:sjk/Tasks/task.dart';
+import 'package:sjk/client/client_service.dart';
+import '../Attendence/present_service.dart';
 import '../Calculator/calculator.dart';
+import '../Materials/material-service.dart';
 import '../Materials/material.dart';
 import '../SizeConfig.dart';
 import '../Attendence/attendence.dart';
@@ -122,7 +126,7 @@ class _HomepageState extends State<Homepage> {
                                         onTap: () {
                                           //_submitform();
                                           Navigator.of(context).push(MaterialPageRoute(
-                                              builder: (context) => Data1()));
+                                              builder: (context) => Client_service()));
                                         },
                                         child: Container(
                                           height: 110,
@@ -179,7 +183,7 @@ class _HomepageState extends State<Homepage> {
                                           onTap: () {
                                             //_submitform();
                                             Navigator.of(context).push(MaterialPageRoute(
-                                                builder: (context) => Data2()));
+                                                builder: (context) => Task_service()));
                                           },
 
                                           child: Container(
@@ -241,7 +245,7 @@ class _HomepageState extends State<Homepage> {
                                       onTap: () {
                                         //_submitform();
                                         Navigator.of(context).push(MaterialPageRoute(
-                                            builder: (context) => Data3()));
+                                            builder: (context) => Material_service()));
                                       }, child:Container(
                                       height: 110,
                                       width: 120,
@@ -296,7 +300,7 @@ class _HomepageState extends State<Homepage> {
                                         onTap: () {
                                           //_submitform();
                                           Navigator.of(context).push(MaterialPageRoute(
-                                              builder: (context) => Data4()));
+                                              builder: (context) => Present_service()));
                                         },
                                         child:Container(
                                           height: 110,
