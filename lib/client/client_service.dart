@@ -40,7 +40,10 @@ class _Client_serviceState extends State<Client_service> {
   }
   @override
   Widget build(BuildContext context) {
-    return service1?Data1(data1:data1,value: value,):Center(child:Text('loading....'));
+    return
+    Scaffold(
+      body: service1?Data1(data1:data1,value:value):Center(child:Image.asset('assets/loading.gif')),
+    );
   }
 }
 

@@ -37,7 +37,10 @@ class _Material_serviceState extends State<Material_service> {
   }
   @override
   Widget build(BuildContext context) {
-    return service?Data3(data:data,):Center(child:Text('loading....'));
+    return
+    Scaffold(
+      body: service?Data3(data:data):Center(child:Image.asset('assets/loading.gif')),
+    );
   }
 }
 

@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:provider/provider.dart';
-import 'package:sjk/Attendence/shift_increaser.dart';
 
 import '../SizeConfig.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +25,8 @@ class _FireBaseInitializationState extends State<FireBaseInitialization> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return
+      Scaffold(
       resizeToAvoidBottomInset: false,
       body: FutureBuilder(
           future: _initialization,
@@ -59,7 +58,7 @@ class _FireBaseInitializationState extends State<FireBaseInitialization> {
 
                       User? _user = streamSnapshot.data as User?;
                       if (_user == null) {
-                        return Homepage();
+                        return Signup();
                       } else {
                         return Homepage();
                       }
@@ -79,7 +78,6 @@ class _FireBaseInitializationState extends State<FireBaseInitialization> {
     );
   }
 }
-
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -88,19 +86,17 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
+
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<Shift>.value(value: Shift())
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home:SplashScreen() ,
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: SplashScreen(),
     );
   }
 }
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 

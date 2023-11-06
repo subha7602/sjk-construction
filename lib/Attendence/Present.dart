@@ -2,9 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 import 'package:sjk/Attendence/present_service.dart';
-import 'package:sjk/Attendence/shift_increaser.dart';
 import 'attendence.dart';
 
 class Present extends StatefulWidget {
@@ -15,6 +13,8 @@ class Present extends StatefulWidget {
 }
 
 class _PresentState extends State<Present> {
+
+  int _shiftValue = 0;
   String value = "Worker Type";
   List<String> items = [
     "Worker Type",
@@ -26,8 +26,11 @@ class _PresentState extends State<Present> {
   ];
   String? one;
   String? two;
-  TextEditingController start = new TextEditingController();
+  TextEditingController date = new TextEditingController();
   TextEditingController name = new TextEditingController();
+  TextEditingController site = new TextEditingController();
+  TextEditingController type = new TextEditingController();
+  TextEditingController shift = new TextEditingController();
   void enterdata() async {
     DocumentReference docRef =
     FirebaseFirestore.instance.collection("attendance").doc();
@@ -36,8 +39,10 @@ class _PresentState extends State<Present> {
     var doc = docSnap.reference.id;
     Map<String, String> data = {
       "Name": name.text,
-      "Date": start.text,
-
+      "Date": date.text,
+      "Type":type.text,
+    " Shift":shift.text,
+      "Site":site.text,
       "doc id": doc,
     };
     await FirebaseFirestore.instance
@@ -46,7 +51,7 @@ class _PresentState extends State<Present> {
         .set(data)
     // .whenComplete(() => toast('Saved Successfully', Colors.blue))
         .whenComplete(() => Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => Present_service())));
+        context, MaterialPageRoute(builder: (context) => Data4())));
   }
 
   @override
@@ -59,7 +64,7 @@ class _PresentState extends State<Present> {
             leading: GestureDetector(
               onTap: () {
                 Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (_) => Data4(data: [],)));
+                    context, MaterialPageRoute(builder: (_) => Data4()));
               },
               child: Icon(
                 Icons.arrow_back,
@@ -77,7 +82,7 @@ class _PresentState extends State<Present> {
             )),
         body: Container(
           margin: EdgeInsets.all(20),
-          height: 460,
+          height: 400,
           width: 400,
           decoration: BoxDecoration(
               color: Color(0xffe6f2ff),
@@ -93,8 +98,6 @@ class _PresentState extends State<Present> {
               )),
           child: Column(children: [
             Container(
-                //
-                // Figma Flutter Generator Rectangle4Widget - RECTANGLE
                 margin:
                     EdgeInsets.only(top: 20, right: 20, left: 20, bottom: 25),
                 height: 52,
@@ -118,6 +121,7 @@ class _PresentState extends State<Present> {
                   ),
                 ),
                 child: TextFormField(
+                  controller: site,
                   cursorColor: Color(0xff01579B),
                   keyboardType: inputType,
                   decoration: new InputDecoration(
@@ -169,8 +173,6 @@ class _PresentState extends State<Present> {
                       hintText: "Worker Name*"),
                 )),
             Container(
-                //
-                // Figma Flutter Generator Rectangle4Widget - RECTANGLE
                 margin: EdgeInsets.only(top: 20, right: 20, left: 20),
                 height: 52,
                 width: 350,
@@ -202,154 +204,142 @@ class _PresentState extends State<Present> {
                           ),
                           value: items);
                     }).toList(),
-                    onChanged: (String? subha) {
+                    onChanged: (String? newValue) {
                       setState(() {
-                        value = subha!;
+                        value = newValue!;
+                        type.text=value;
                       });
                     })),
-            Container(
-                //
-                // Figma Flutter Generator Rectangle4Widget - RECTANGLE
-                margin: EdgeInsets.only(top: 20, right: 20, left: 20),
-                height: 52,
-                width: 350,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 7,
-                    )
-                  ],
-                  color: Colors.white,
-                  border: Border.all(
-                    width: 1,
-                    color: Colors.white,
-                  ),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(5),
-                    topRight: Radius.circular(5),
-                    bottomLeft: Radius.circular(5),
-                    bottomRight: Radius.circular(5),
-                  ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                        padding: EdgeInsets.zero,
-                        child: Text(
-                          'Shift',
-                          style: TextStyle(fontSize: 18),
-                        )),
-                    SizedBox(height: 38, width: 120),
-                    Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            context.read<Shift>().incvalue();
-                            setState(() {});
-                          },
-                          child: Container(
-                              padding: EdgeInsets.symmetric(horizontal: 10),
-                              child: Icon(Icons.add_circle_outlined)),
-                        ),
-                        Container(
-                            child:
-                                Text(context.watch<Shift>().value.toString())),
-                        GestureDetector(
-                            onTap: () {
-                              context.read<Shift>().decvalue();
-                              setState(() {});
-                            },
-                            child: Container(
-                                padding: EdgeInsets.symmetric(horizontal: 10),
-                                child: Icon(Icons.remove_circle)))
-                      ],
-                    ),
-                  ],
-                )),
-      Container(
-        //
-        // Figma Flutter Generator Rectangle4Widget - RECTANGLE
-          margin: EdgeInsets.only(top: 20, right: 20, left: 20),
-          height: 52,
-          width: 350,
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                blurRadius: 7,
-              )
-            ],
-            color: Colors.white,
-            border: Border.all(
-              width: 1,
-              color: Colors.white,
-            ),
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(5),
-              topRight: Radius.circular(5),
-              bottomLeft: Radius.circular(5),
-              bottomRight: Radius.circular(5),
-            ),
-          ),child: Container(
-          height: 62,
-          width: 150,
-          child: Center(
-              child: TextField(
-                controller: start,
-                //editing controller of this TextField
-                decoration: InputDecoration(
-                    hintText: "Date",
-                    icon: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(
-                        Icons.calendar_today,
-                        color: Colors.black,
-                      ),
-                    ),
-                    border: InputBorder.none //icon of text field
-                  //labelText: dateInput.text,//label text of field
-                ),
-                readOnly: true,
-                //set it true, so that user will not able to edit text
-                onTap: () async {
-                  DateTime? pickedDate = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(1950),
-                      //DateTime.now() - not to allow to choose before today.
-                      lastDate: DateTime(2100));
 
-                  if (pickedDate != null) {
-                    print(
-                        pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
-                    String formattedDate =
-                    DateFormat('yyyy-MM-dd').format(pickedDate);
-                    print(
-                        formattedDate); //formatted date output using intl package =>  2021-03-16
-                    setState(() {
-                      var dateInput;
-                      dateInput.text =
-                          formattedDate; //set output date to TextField value.
-                    });
-                  } else {
-                    setState(() {
-                      var dateInput;
-                      dateInput.text = "";
-                    });
-                  }
+
+// Your widget
+    Container(
+      margin: EdgeInsets.only(top: 20, right: 20, left: 20),
+      height: 52,
+      width: 350,
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 7,
+          )
+        ],
+        color: Colors.white,
+        border: Border.all(
+          width: 1,
+          color: Colors.white,
+        ),
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            padding: EdgeInsets.zero,
+            child: Text(
+              'Shift',
+              style: TextStyle(fontSize: 18),
+            ),
+          ),
+          SizedBox(height: 38, width: 120),
+          Row(
+            children: [
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _shiftValue++;
+                    shift.text = _shiftValue.toString(); // Save to controller
+                  });
                 },
-              )),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(15),
-              topRight: Radius.circular(15),
-              bottomLeft: Radius.circular(15),
-              bottomRight: Radius.circular(15),
-            ),
-          )),
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Icon(Icons.add_circle_outlined),
+                ),
+              ),
+              Container(
+                child: Text(shift.text), // Use the controller value
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _shiftValue--;
+                    shift.text = _shiftValue.toString(); // Save to controller
+                  });
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Icon(Icons.remove_circle),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    ),
 
 
-      )]),
+
+        Container(
+              margin: EdgeInsets.only(top: 20, right: 20, left: 20),
+              height: 52,
+              width: 350,
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 7,
+                  )
+                ],
+                color: Colors.white,
+                border: Border.all(
+                  width: 1,
+                  color: Colors.white,
+                ),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Container(
+                height: 62,
+                width: 150,
+                child: Center(
+                  child: TextField(
+                    controller: date,
+                    decoration: InputDecoration(
+                      hintText: "Date",
+                      icon: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.calendar_today,
+                          color: Colors.black,
+                        ),
+                      ),
+                      border: InputBorder.none,
+                    ),
+                    readOnly: true,
+                    onTap: () async {
+                      DateTime? pickedDate = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(1950),
+                        lastDate: DateTime(2100),
+                      );
+
+                      if (pickedDate != null) {
+                        String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                        setState(() {
+                          date.text = formattedDate;  // Update 'start' controller's text
+                        });
+                      } else {
+                        setState(() {
+                          date.text = "";
+                        });
+                      }
+                    },
+                  ),
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+              ),
+            )
+          ]),
         ),
         bottomNavigationBar: Container(
             height: 100,

@@ -22,6 +22,14 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  final List<GridItemData> gridData = [
+    GridItemData('CLIENT', 'assets/client.png'),
+    GridItemData('TASKS', 'assets/tasks.png'),
+    GridItemData('MATERIALS', 'assets/materials.png'),
+    GridItemData('ATTENDENCE', 'assets/attendence.png'),
+    GridItemData('TRANSACTION', 'assets/payment.png'),
+    GridItemData('CALCULATOR', 'assets/calculator.png'),
+  ];
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
@@ -101,376 +109,110 @@ class _HomepageState extends State<Homepage> {
                           ),
                         ),
 
-                        Container(
-                          width: 460,
-                          height: 450,
-
-                          margin: EdgeInsets.symmetric(vertical: 210,horizontal: 26),
-                          padding: EdgeInsets.symmetric( vertical: 16,),
+                        LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          return
+            Container(
+                width: constraints.maxWidth > 460 ? 460 : constraints.maxWidth,
+                height: constraints.maxHeight > 450 ? 450 : constraints
+                    .maxHeight,
+                margin: EdgeInsets.symmetric(vertical: 210, horizontal: 26),
+                padding: EdgeInsets.symmetric(vertical: 16),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Color(0xff01579B), width: 5),
+                  color: Color(0xffe6f2ff),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child:
+                GridView.builder(
+                  itemCount: 6,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                  ),
+                  itemBuilder: (BuildContext context, int index) {
+                    return FractionallySizedBox(
+                      widthFactor: 0.9,
+                      heightFactor: 0.9,
+                      child: GestureDetector(
+                        onTap: () {
+                          if (index == 0) {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => Client_service(),
+                            ));
+                          } else if (index == 1) {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => Task_service(),
+                            ));
+                          } else if (index == 2) {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => Material_service(),
+                            ));
+                          } else if (index == 3) {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => Data4(),
+                            ));
+                          } else if (index == 4) {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => Data5(),
+                            ));
+                          } else if (index == 5) {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => Data6(),
+                            ));
+                          }
+                        },
+                        child: Container(
+                          margin: EdgeInsets.all(7),
                           decoration: BoxDecoration(
-                              border: Border.all(color: Color(0xff01579B), width: 5),
-                              color: Color(0xffe6f2ff),
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(15),
-                                topRight: Radius.circular(15),
-                                bottomLeft: Radius.circular(15),
-                                bottomRight: Radius.circular(15),
-                              )),
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 7,
+                              ),
+                            ],
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
                           child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Expanded(
-                                    flex: 2,
-                                    child: Row(children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          //_submitform();
-                                          Navigator.of(context).push(MaterialPageRoute(
-                                              builder: (context) => Client_service()));
-                                        },
-                                        child: Container(
-                                          height: 110,
-                                          width: 120,
-                                          margin: EdgeInsets.only(
-                                              right: 5,  top: 10, left: 30),
-                                          decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  blurRadius: 7,
-                                                )
-                                              ],
-                                              color: Colors.white,
-                                              borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(15),
-                                                topRight: Radius.circular(15),
-                                                bottomLeft: Radius.circular(15),
-                                                bottomRight: Radius.circular(15),
-                                              )),
-
-                                          child:  Column(
-                                            children: [
-                                              Container(
-                                                margin: EdgeInsets.all(20),
-                                                padding: EdgeInsets.all(20),
-                                                width: 50,
-                                                height: 50,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  image: DecorationImage(
-                                                      image: AssetImage(
-                                                          'assets/client.png'
-                                                      ),
-                                                      fit: BoxFit.fill
-                                                  ),
-                                                ),
-                                              ),
-                                              Container(
-                                                child: Align(
-                                                  alignment: Alignment.bottomCenter,
-
-                                                  child: Text("CLIENT",
-                                                      style: TextStyle(
-                                                          fontSize: 12,
-                                                          fontWeight: FontWeight.bold,
-                                                          color: Color(0xff01579B))),
-                                                ),
-                                              ),
-
-                                            ],
-                                          ),
-                                        ),
-                                      ),GestureDetector(
-                                          onTap: () {
-                                            //_submitform();
-                                            Navigator.of(context).push(MaterialPageRoute(
-                                                builder: (context) => Task_service()));
-                                          },
-
-                                          child: Container(
-                                            height: 110,
-                                            width: 120,
-                                            margin: EdgeInsets.only(
-                                                right: 30,  top: 10, left: 25),
-
-                                            decoration: BoxDecoration(
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    blurRadius: 7,
-                                                  )
-                                                ],
-                                                color: Colors.white,
-                                                borderRadius: BorderRadius.only(
-                                                  topLeft: Radius.circular(15),
-                                                  topRight: Radius.circular(15),
-                                                  bottomLeft: Radius.circular(15),
-                                                  bottomRight: Radius.circular(15),
-                                                )),
-
-                                            child:  Column(
-                                              children: [
-                                                Container(
-                                                  margin: EdgeInsets.all(20),
-                                                  padding: EdgeInsets.all(20),
-                                                  width: 50,
-                                                  height: 50,
-                                                  decoration: BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    image: DecorationImage(
-                                                        image: AssetImage(
-                                                            'assets/tasks.png'
-                                                        ),
-                                                        fit: BoxFit.fill
-                                                    ),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  child: Align(
-                                                    alignment: Alignment.bottomCenter,
-
-                                                    child: Text("TASKS",
-                                                        style: TextStyle(
-                                                            fontSize: 12,
-                                                            fontWeight: FontWeight.bold,
-                                                            color: Color(0xff01579B))),
-                                                  ),
-                                                ),
-
-                                              ],
-                                            ),)
-                                      ) ])),
-                                Expanded(
-                                  flex: 2,
-                                  child: Row(children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        //_submitform();
-                                        Navigator.of(context).push(MaterialPageRoute(
-                                            builder: (context) => Material_service()));
-                                      }, child:Container(
-                                      height: 110,
-                                      width: 120,
-                                      margin: EdgeInsets.only(
-                                          right: 15,  left: 30),
-                                      decoration: BoxDecoration(
-                                          boxShadow: [
-                                            BoxShadow(
-                                              blurRadius: 7,
-                                            )
-                                          ],
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(15),
-                                            topRight: Radius.circular(15),
-                                            bottomLeft: Radius.circular(15),
-                                            bottomRight: Radius.circular(15),
-                                          )),
-                                      child:  Column(
-                                        children: [
-                                          Container(
-                                            margin: EdgeInsets.all(20),
-                                            padding: EdgeInsets.all(20),
-                                            width: 50,
-                                            height: 50,
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              image: DecorationImage(
-                                                  image: AssetImage(
-                                                      'assets/materials.png'
-                                                  ),
-                                                  fit: BoxFit.fill
-                                              ),
-                                            ),
-                                          ),
-                                          Container(
-                                            child: Align(
-                                              alignment: Alignment.bottomCenter,
-
-                                              child: Text("MATERIALS",
-                                                  style: TextStyle(
-                                                      fontSize: 12,
-                                                      fontWeight: FontWeight.bold,
-                                                      color: Color(0xff01579B))),
-                                            ),
-                                          ),
-
-                                        ],
-                                      ),),
-                                    ),
-                                    GestureDetector(
-                                        onTap: () {
-                                          //_submitform();
-                                          Navigator.of(context).push(MaterialPageRoute(
-                                              builder: (context) => Present_service()));
-                                        },
-                                        child:Container(
-                                          height: 110,
-                                          width: 120,
-                                          margin: EdgeInsets.only(
-                                              right: 30,  left: 15),
-                                          decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  blurRadius: 7,
-                                                )
-                                              ],
-                                              color: Colors.white,
-                                              borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(15),
-                                                topRight: Radius.circular(15),
-                                                bottomLeft: Radius.circular(15),
-                                                bottomRight: Radius.circular(15),
-                                              )),
-                                          child:  Column(
-                                            children: [
-                                              Container(
-                                                margin: EdgeInsets.all(20),
-                                                padding: EdgeInsets.all(20),
-                                                width: 50,
-                                                height: 50,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  image: DecorationImage(
-                                                      image: AssetImage(
-                                                          'assets/attendence.png'
-                                                      ),
-                                                      fit: BoxFit.fill
-                                                  ),
-                                                ),
-                                              ),
-                                              Container(
-                                                child: Align(
-                                                  alignment: Alignment.bottomCenter,
-
-                                                  child: Text("ATTENDENCE",
-                                                      style: TextStyle(
-                                                          fontSize: 12,
-                                                          fontWeight: FontWeight.bold,
-                                                          color: Color(0xff01579B))),
-                                                ),
-                                              ),
-
-                                            ],
-                                          ),)
-                                    ),
-                                  ]),
-
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                margin: EdgeInsets.all(20),
+                                padding: EdgeInsets.all(20),
+                                width: 50,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                        gridData[index].imagePath),
+                                    fit: BoxFit.fill,
+                                  ),
                                 ),
-                                Expanded(
-                                  flex: 2,
-                                  child: Row(children: [
-
-                                    GestureDetector(
-                                        onTap: () {
-                                          //_submitform();
-                                          Navigator.of(context).push(MaterialPageRoute(
-                                              builder: (context) => Data5()));
-                                        },
-                                        child:Container(
-                                          height: 110,
-                                          width: 120,
-                                          margin: EdgeInsets.only(right: 15,  bottom: 15, left: 30),
-                                          decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  blurRadius: 7,
-                                                )
-                                              ],
-                                              color: Colors.white,
-                                              borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(15),
-                                                topRight: Radius.circular(15),
-                                                bottomLeft: Radius.circular(15),
-                                                bottomRight: Radius.circular(15),
-                                              )),
-                                          child:  Column(
-                                            children: [
-                                              Container(
-                                                margin: EdgeInsets.all(20),
-                                                padding: EdgeInsets.all(20),
-                                                width: 50,
-                                                height: 50,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  image: DecorationImage(
-                                                      image: AssetImage(
-                                                          'assets/payment.png'
-                                                      ),
-                                                      fit: BoxFit.fill
-                                                  ),
-                                                ),
-                                              ),
-                                              Container(
-                                                child: Align(
-                                                  alignment: Alignment.bottomCenter,
-                                                  child: Text("PAYMENT",
-                                                      style: TextStyle(
-                                                          fontSize: 12,
-                                                          fontWeight: FontWeight.bold,
-                                                          color: Color(0xff01579B))),
-                                                ),
-                                              ),
-
-                                            ],
-                                          ),)
+                              ),
+                              Container(
+                                child: Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: Text(
+                                    gridData[index].text,
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xff01579B),
                                     ),
-                                    GestureDetector(
-                                        onTap: () {
-                                          //_submitform();
-                                          Navigator.of(context).push(MaterialPageRoute(
-                                              builder: (context) => Data6()));
-                                        },
-                                        child:Container(
-                                          height: 110,
-                                          width: 120,
-                                          margin: EdgeInsets.only(right: 30,  bottom: 15, left: 15),
-                                          decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  blurRadius: 7,
-                                                )
-                                              ],
-                                              color: Colors.white,
-                                              borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(15),
-                                                topRight: Radius.circular(15),
-                                                bottomLeft: Radius.circular(15),
-                                                bottomRight: Radius.circular(15),
-                                              )),
-                                          child:  Column(
-                                            children: [
-                                              Container(
-                                                margin: EdgeInsets.all(20),
-                                                padding: EdgeInsets.all(20),
-                                                width: 50,
-                                                height: 50,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  image: DecorationImage(
-                                                      image: AssetImage(
-                                                          'assets/calculator.png'
-                                                      ),
-                                                      fit: BoxFit.fill
-                                                  ),
-                                                ),
-                                              ),
-                                              Container(
-                                                child: Align(
-                                                  alignment: Alignment.bottomCenter,
-                                                  child: Text("CALCULATOR",
-                                                      style: TextStyle(
-                                                          fontSize: 12,
-                                                          fontWeight: FontWeight.bold,
-                                                          color: Color(0xff01579B))),
-                                                ),
-                                              ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ));
 
-                                            ],
-                                          ),)
-                                    ),
-                                  ]),
 
-                                ),]),
-                        )
+
+        })
                         ]),
 
 
@@ -497,4 +239,10 @@ class WaveClipper extends CustomClipper<Path> {
   bool shouldReclip(CustomClipper<Path> oldClipper) {
     return false;
   }
+}
+class GridItemData {
+  final String text;
+  final String imagePath;
+
+  GridItemData(this.text, this.imagePath);
 }

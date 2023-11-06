@@ -28,9 +28,7 @@ class _SimpleState extends State<Simple> {
                  Text('Net Amount: $result',style:TextStyle(fontSize: 20,fontWeight: FontWeight.w500,color: Color(0xff01579B),
                  )),
                  Container(
-                   margin: EdgeInsets.only(top:50,left: 20,right: 20,),
-padding: EdgeInsets.only(top: 10.0,left: 15,right: 10,bottom: 5),
-                   height: 340,
+                   height: 350,
                    width: 400,
                    decoration: BoxDecoration(
                        color: Color(0xff26c0df),
@@ -47,7 +45,7 @@ padding: EdgeInsets.only(top: 10.0,left: 15,right: 10,bottom: 5),
                    child: Column(
                     children: [
                       Expanded(
-                        flex:8,
+                        flex: 8,
                         child: Row(
                           children: [
                             Expanded(
@@ -111,7 +109,7 @@ padding: EdgeInsets.only(top: 10.0,left: 15,right: 10,bottom: 5),
                         ),
                       ),
                       Expanded(
-                        flex:8,
+                        flex: 8,
                         child: Row(
                           children: [
                             Expanded(
@@ -216,7 +214,7 @@ padding: EdgeInsets.only(top: 10.0,left: 15,right: 10,bottom: 5),
                                       items: items.map((String items) {
                                         return DropdownMenuItem(
                                             child: Padding(
-                                              padding: const EdgeInsets.all(10.0),
+                                              padding: const EdgeInsets.all(5.0),
                                               child: Text(items),
                                             ), value: items);
                                       }).toList(),

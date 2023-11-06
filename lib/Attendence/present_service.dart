@@ -16,7 +16,7 @@ class _Present_serviceState extends State<Present_service> {
 
   List data4 =[];
   Future<void> fetchdata()async {
-    var Collection=await FirebaseFirestore.instance.collection("attendence").get();
+    var Collection=await FirebaseFirestore.instance.collection("attendance").get();
 
     data4=Collection.docs;
   }
@@ -27,7 +27,6 @@ class _Present_serviceState extends State<Present_service> {
     fetchdata().whenComplete(() {
       setState((){
         service4=true;
-
         print(data4);
       });
     });
@@ -37,7 +36,10 @@ class _Present_serviceState extends State<Present_service> {
   }
   @override
   Widget build(BuildContext context) {
-    return service4?Data4(data:data4,):Center(child:Text('loading....'));
+    return Scaffold(
+      body: service4 && data4 != null ? Data4( ) : Center(child:Image.asset('assets/loading.gif')),
+    );
   }
+
 }
 

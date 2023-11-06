@@ -2,10 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:provider/provider.dart';
+
 import 'package:sjk/Tasks/Task_service.dart';
 import 'package:sjk/Tasks/task.dart';
-import '../Attendence/shift_increaser.dart';
 
 class Tasklist extends StatefulWidget {
   const Tasklist({Key? key}) : super(key: key);
@@ -15,27 +14,10 @@ class Tasklist extends StatefulWidget {
 }
 
 class _TasklistState extends State<Tasklist> {
-  TextEditingController Task = new TextEditingController();
-  TextEditingController start = new TextEditingController();
-  TextEditingController end = new TextEditingController();
+  TextEditingController task = new TextEditingController();
+
   var inputType;
 
-  // void submit() {
-  //   start.text.length == 0
-  //       ? toast('Select Date', Colors.red)
-  //       : end.text.length == 0
-  //       ? toast('Select Date', Colors.red)
-  //       : enterdata();
-  // }
-  //
-  // void toast(String text, Color clr) {
-  //   Fluttertoast.showToast(
-  //       msg: text,
-  //       gravity: ToastGravity.CENTER,
-  //       toastLength: Toast.LENGTH_LONG,
-  //       backgroundColor: clr,
-  //       textColor: Colors.white);
-  // }
   void enterdata() async {
     DocumentReference docRef =
         FirebaseFirestore.instance.collection("task").doc();
@@ -43,9 +25,10 @@ class _TasklistState extends State<Tasklist> {
     DocumentSnapshot docSnap = await docRef.get();
     var doc = docSnap.reference.id;
     Map<String, String> data = {
-      "Task": Task.text,
-      "Start-date": start.text,
-      "End-date": end.text,
+      "task": task.text,
+      "start": dateInput.text,
+      "end": dateInput2.text,
+
       "doc id": doc,
     };
     await FirebaseFirestore.instance
@@ -58,6 +41,10 @@ class _TasklistState extends State<Tasklist> {
   }
 
   TextEditingController dateInput = new TextEditingController();
+
+  TextEditingController dateInput2 = new TextEditingController();
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -127,7 +114,7 @@ class _TasklistState extends State<Tasklist> {
                     ),
                   ),
                   child: TextFormField(
-                    controller: Task,
+                    controller: task,
                     cursorColor: Colors.black,
                     keyboardType: inputType,
                     decoration: new InputDecoration(
@@ -204,7 +191,7 @@ class _TasklistState extends State<Tasklist> {
                       width: 150,
                       child: Center(
                           child: TextField(
-                        controller: start,
+                        controller: dateInput,
                         //editing controller of this TextField
                         decoration: InputDecoration(
                             hintText: "Start Date",
@@ -278,7 +265,7 @@ class _TasklistState extends State<Tasklist> {
                       width: 150,
                       child: Center(
                           child: TextField(
-                        controller: end,
+                        controller: dateInput2,
                         //editing controller of this TextField
                         decoration: InputDecoration(
                             hintText: "End Date",
@@ -307,12 +294,12 @@ class _TasklistState extends State<Tasklist> {
                             print(
                                 formattedDate); //formatted date output using intl package =>  2021-03-16
                             setState(() {
-                              dateInput.text =
+                              dateInput2.text =
                                   formattedDate; //set output date to TextField value.
                             });
                           } else {
                             setState(() {
-                              dateInput.text = "";
+                              dateInput2.text = "";
                             });
                           }
                         },

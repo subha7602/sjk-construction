@@ -47,7 +47,7 @@ class _SignupState extends State<Signup> {
               ),
             ),
             actions: [
-              FlatButton(
+              ElevatedButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -94,7 +94,7 @@ class _SignupState extends State<Signup> {
     if (feedback != null) {
       _alertDialogBox(feedback);
     } else {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Homepage()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Login()));
     }
   }
 
@@ -393,91 +393,91 @@ class _SignupState extends State<Signup> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 15,
-              ),
-              Expanded(
-                flex: 11,
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 5,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10.0),
-                        child: Container(
-                          height: 1.0,
-                          width: 130,
-                          color: Color(0xff1248a3),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Center(
-                        child: Container(
-                          child: Text('OR'),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 5,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10.0),
-                        child: Container(
-                          height: 1.0,
-                          width: 130,
-                          color: Color(0xff1248a3),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: GestureDetector(
-                  onTap: () {
-                    googlesigninclass.googleLogin();
-                  },
-                  child: Container(
-                    height: 50,
-                    width: 220,
-                    decoration: BoxDecoration(
-                        color: Color(0xff1248a3),
-                        borderRadius: BorderRadius.circular(5)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Row(
-                        children: [
-                          Container(
-                              height: 30,
-                              width: 30,
-                              child: Image(
-                                image: AssetImage('assets/g1.png'),
-                                fit: BoxFit.fill,
-                              )),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 20,
-                              right: 10,
-                            ),
-                            child: Align(
-                                alignment: Alignment.centerRight,
-                                child: Text('Sign-In with Google',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 15))),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              // SizedBox(
+              //   height: 15,
+              // ),
+              // Expanded(
+              //   flex: 11,
+              //   child: Row(
+              //     children: [
+              //       Expanded(
+              //         flex: 5,
+              //         child: Padding(
+              //           padding: EdgeInsets.symmetric(vertical: 10.0),
+              //           child: Container(
+              //             height: 1.0,
+              //             width: 130,
+              //             color: Color(0xff1248a3),
+              //           ),
+              //         ),
+              //       ),
+              //       Expanded(
+              //         flex: 1,
+              //         child: Center(
+              //           child: Container(
+              //             child: Text('OR'),
+              //           ),
+              //         ),
+              //       ),
+              //       Expanded(
+              //         flex: 5,
+              //         child: Padding(
+              //           padding: EdgeInsets.symmetric(vertical: 10.0),
+              //           child: Container(
+              //             height: 1.0,
+              //             width: 130,
+              //             color: Color(0xff1248a3),
+              //           ),
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 15,
+              // ),
+              // Align(
+              //   alignment: Alignment.center,
+              //   child: GestureDetector(
+              //     onTap: () {
+              //       googlesigninclass.googleLogin();
+              //     },
+              //     child: Container(
+              //       height: 50,
+              //       width: 220,
+              //       decoration: BoxDecoration(
+              //           color: Color(0xff1248a3),
+              //           borderRadius: BorderRadius.circular(5)),
+              //       child: Padding(
+              //         padding: const EdgeInsets.all(12.0),
+              //         child: Row(
+              //           children: [
+              //             Container(
+              //                 height: 30,
+              //                 width: 30,
+              //                 child: Image(
+              //                   image: AssetImage('assets/g1.png'),
+              //                   fit: BoxFit.fill,
+              //                 )),
+              //             Padding(
+              //               padding: const EdgeInsets.only(
+              //                 left: 20,
+              //                 right: 10,
+              //               ),
+              //               child: Align(
+              //                   alignment: Alignment.centerRight,
+              //                   child: Text('Sign-In with Google',
+              //                       style: TextStyle(
+              //                           color: Colors.white,
+              //                           fontWeight: FontWeight.w500,
+              //                           fontSize: 15))),
+              //             ),
+              //           ],
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
               Row(
                 children: [
                   Padding(

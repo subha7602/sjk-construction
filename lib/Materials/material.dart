@@ -45,38 +45,27 @@ class _Data3State extends State<Data3> {
         body:
         Column(
           children: [
-            // Container(
-            //   //
-            //   // Figma Flutter Generator Rectangle4Widget - RECTANGLE
-            //     margin: EdgeInsets.all(20),
-            //     height: 52,
-            //     width: 350,
-            //     decoration: BoxDecoration(
-            //       color: Colors.white10,
-            //       border: Border.all(width: 1, color: Colors.black),
-            //       borderRadius: BorderRadius.only(
-            //         topLeft: Radius.circular(15),
-            //         topRight: Radius.circular(15),
-            //         bottomLeft: Radius.circular(15),
-            //         bottomRight: Radius.circular(15),
-            //       ),
-            //     ),
-            //     child:TextFormField(
-            //       cursorColor: Colors.black,
-            //       keyboardType: inputType,
-            //       decoration: new InputDecoration(
-            //           border: InputBorder.none,
-            //           focusedBorder: InputBorder.none,
-            //           enabledBorder: InputBorder.none,
-            //           errorBorder: InputBorder.none,
-            //           disabledBorder: InputBorder.none,
-            //           contentPadding:
-            //           EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
-            //           hintText: "Search material",
-            //           prefixIcon: Icon(Icons.search)),
-            //     )
-            // ),
-
+            Container(
+              height: 50,color:  Color(0xff01579B),
+              child: Expanded(
+                flex: 9,
+                child: Container(
+                  child: Row(
+                    children: [
+                      Expanded(flex:3,child: Container(
+                        child: Center(child: Text('Material',style: TextStyle(color: Colors.white),)),
+                      )),
+                      Expanded(flex:3,child: Container(
+                        child: Center(child: Text('Amount',style: TextStyle(color: Colors.white),)),
+                      )),
+                      Expanded(flex:3,child: Container(
+                        child: Center(child: Text('Status',style: TextStyle(color: Colors.white),)),
+                      )),
+                    ],
+                  ),
+                ),
+              ),
+            ),
             Container(
               height: 450,
               child:
@@ -88,22 +77,16 @@ class _Data3State extends State<Data3> {
                     height: 105,
                     width:350,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(12),
-                        topRight: Radius.circular(12),
-                        bottomLeft: Radius.circular(12),
-                        bottomRight: Radius.circular(12),
-                      ),
                       color: Color.fromRGBO(217, 217, 217, 1),
                     ),
                     child: Expanded(
-                      flex:8,
+                      flex:9,
                       child: Row(
-                        children: [  Expanded(
-                        flex: 4,
+                        children: [
+                          SizedBox(width: 10,),
+                          Expanded(
+                        flex: 3,
                         child: Container(
-                          margin:
-                          EdgeInsets.only(right: 20, top: 10, bottom: 10),
                           decoration: BoxDecoration(
                             border: Border.all(width: 1, color: Colors.black),
                             borderRadius: BorderRadius.only(
@@ -123,11 +106,11 @@ class _Data3State extends State<Data3> {
                           ),
                         ),
                       ),
+                            SizedBox(width: 10,),
                             Expanded(
-                              flex: 2,
+                              flex: 3,
                               child: Container(
-                                margin:
-                                EdgeInsets.only(right: 20, top: 10, bottom: 10),
+
                                 decoration: BoxDecoration(
                                   border: Border.all(width: 1, color: Colors.black),
                                   borderRadius: BorderRadius.only(
@@ -139,7 +122,7 @@ class _Data3State extends State<Data3> {
                                 ),
                                 padding: EdgeInsets.all(20),
                                 child: Text(
-                                  widget.data[index]["Quantity"],
+                                  widget.data[index]["NetAmount"],
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 16,
@@ -147,11 +130,11 @@ class _Data3State extends State<Data3> {
                                 ),
                               ),
                             ),
+
+                          SizedBox(width: 10,),
                         Expanded(
-                          flex: 2,
+                          flex: 3,
                           child: Container(
-                            margin:
-                            EdgeInsets.only(right: 20, top: 10, bottom: 10),
                             decoration: BoxDecoration(
                               border: Border.all(width: 1, color: Colors.black),
                               borderRadius: BorderRadius.only(
@@ -163,7 +146,7 @@ class _Data3State extends State<Data3> {
                             ),
                             padding: EdgeInsets.all(20),
                             child: Text(
-                              widget.data[index]["Quantity"],
+                              widget.data[index]["DropdownValue"],
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 16,
@@ -171,56 +154,65 @@ class _Data3State extends State<Data3> {
                             ),
                           ),
                         ),
+
+                          SizedBox(width: 10,),
                            ],
 
                           ),
 
 
                     ),
+
                   );
                 },
                 itemCount: widget.data.length,
+
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                //_submitform();
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => Info(data: [],)));
-              },
-              child: Container(
-                width: 200,
-                height: 50,
-                margin: EdgeInsets.all(30),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(5),
-                    topRight: Radius.circular(5),
-                    bottomLeft: Radius.circular(5),
-                    bottomRight: Radius.circular(5),
-                  ),
-                  color: Color(0xff01579B),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          'ADD NEW MATERIAL+',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold),
-                        )),
-                  ],
-                ),
-              ),
-            )
+
           ],
         ),
+bottomNavigationBar: Padding(
+  padding: const EdgeInsets.all(8.0),
+  child:   ElevatedButton(
 
+    onPressed: () {
+
+      //_submitform();
+
+      Navigator.of(context)
+
+          .push(MaterialPageRoute(builder: (context) => Info(data: [],)));
+
+    },
+
+    style: ElevatedButton.styleFrom(
+
+      primary: Color(0xff01579B), // background color
+
+      onPrimary: Colors.white, // text color
+
+      shape: RoundedRectangleBorder(
+
+        borderRadius: BorderRadius.all(Radius.circular(5)),
+
+      ),
+
+      minimumSize: Size(200, 50),
+
+    ),
+
+    child: Text(
+
+      'ADD NEW MATERIAL+',
+
+      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+
+    ),
+
+  ),
+)
+      ,
         );
   }
 

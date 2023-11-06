@@ -18,9 +18,7 @@ class _InfoState extends State<Info> {
   TextEditingController dateInput = new TextEditingController();
   TextEditingController Material = new TextEditingController();
   TextEditingController Quantity = new TextEditingController();
-  //String result = "0";
-  // int sum = int.parse(Material.text) * int.parse(Quantity.text);
-  // String result = sum.toString();
+  TextEditingController Rate= new TextEditingController();
 
   String value = "Type";
   List<String> items = ["Type","Received","Used"];
@@ -30,10 +28,14 @@ class _InfoState extends State<Info> {
 
     DocumentSnapshot docSnap = await docRef.get();
     var doc = docSnap.reference.id;
+    final quantity = int.tryParse(Quantity.text) ?? 0;
+    final rate = int.tryParse(Rate.text) ?? 0;
+    final netAmount = quantity * rate;
     Map<String, String> data = {
       "Material": Material.text,
       "Date": dateInput.text,
-      "Quantity": Quantity.text,
+      "DropdownValue": value,
+      "NetAmount": netAmount.toString(),
       "doc id": doc,
     };
     await FirebaseFirestore.instance
@@ -69,330 +71,346 @@ class _InfoState extends State<Info> {
                   color: Colors.white,
                   fontWeight: FontWeight.bold),
             )),
-        body: Container(
-          margin: EdgeInsets.only(top: 80, left: 20, right: 20),
-          height: 500,
-          width: 400,
-          decoration: BoxDecoration(
-              color: Color(0xffe6f2ff),
-              border: Border.all(
-                width: 3,
-                color: Color(0xff01579B),
+        body: SingleChildScrollView(
+          child: Container(
+            margin: EdgeInsets.only(top: 80, left: 20, right: 20),
+            height: 500,
+            width: 400,
+            decoration: BoxDecoration(
+                color: Color(0xffe6f2ff),
+                border: Border.all(
+                  width: 3,
+                  color: Color(0xff01579B),
+                ),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15),
+                  topRight: Radius.circular(15),
+                  bottomLeft: Radius.circular(15),
+                  bottomRight: Radius.circular(15),
+                )),
+            child:
+            Column(children: [
+              Container(
+                  margin:
+                      EdgeInsets.only(top: 30, right: 20, left: 20, bottom: 25),
+                  height: 52,
+                  width: 350,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 7,
+                      )
+                    ],
+                    color: Colors.white,
+                    border: Border.all(
+                      width: 1,
+                      color: Colors.white,
+                    ),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(5),
+                      topRight: Radius.circular(5),
+                      bottomLeft: Radius.circular(5),
+                      bottomRight: Radius.circular(5),
+                    ),
+                  ),
+                  child: TextFormField(
+                    cursorColor: Color(0xff01579B),
+                    keyboardType: inputType,
+                    decoration: new InputDecoration(
+                        border: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        errorBorder: InputBorder.none,
+                        disabledBorder: InputBorder.none,
+                        contentPadding: EdgeInsets.only(
+                            left: 15, bottom: 11, top: 11, right: 15),
+                        hintText: "Client Name*"),
+                  )),
+              Container(
+
+                  //
+                  // Figma Flutter Generator Rectangle4Widget - RECTANGLE
+                  margin: EdgeInsets.only(right: 20, left: 20),
+                  height: 52,
+                  width: 350,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 7,
+                      )
+                    ],
+                    color: Colors.white,
+                    border: Border.all(
+                      width: 1,
+                      color: Colors.white,
+                    ),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(5),
+                      topRight: Radius.circular(5),
+                      bottomLeft: Radius.circular(5),
+                      bottomRight: Radius.circular(5),
+                    ),
+                  ),
+                  child: TextFormField(
+                    controller: Material,
+                    cursorColor: Color(0xff01579B),
+                    keyboardType: inputType,
+                    decoration: new InputDecoration(
+                        border: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        errorBorder: InputBorder.none,
+                        disabledBorder: InputBorder.none,
+                        contentPadding: EdgeInsets.only(
+                            left: 15, bottom: 11, top: 11, right: 15),
+                        hintText: "Material Name*"),
+                  )),
+              Container(
+                  //
+                  // Figma Flutter Generator Rectangle4Widget - RECTANGLE
+                  margin: EdgeInsets.only(top: 25, right: 20, left: 20),
+                  height: 52,
+                  width: 350,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 7,
+                      )
+                    ],
+                    color: Colors.white,
+                    border: Border.all(
+                      width: 1,
+                      color: Colors.white,
+                    ),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(5),
+                      topRight: Radius.circular(5),
+                      bottomLeft: Radius.circular(5),
+                      bottomRight: Radius.circular(5),
+                    ),
+                  ),
+                  child: Container(
+                      height: 62,
+                      width: 150,
+                      child: Center(
+                          child: TextField(
+                        controller: dateInput,
+
+                        //editing controller of this TextField
+                        decoration: InputDecoration(
+                            icon: Icon(
+                              Icons.calendar_today,
+                              color: Colors.black,
+                            ),
+                            hintText: "Choose Date*",
+                            border: InputBorder.none //icon of text field
+                            //labelText: dateInput.text,//label text of field
+                            ),
+                        readOnly: true,
+                        //set it true, so that user will not able to edit text
+                        onTap: () async {
+                          DateTime? pickedDate = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime(1950),
+                              //DateTime.now() - not to allow to choose before today.
+                              lastDate: DateTime(2100));
+
+                          if (pickedDate != null) {
+                            print(
+                                pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                            String formattedDate =
+                                DateFormat('yyyy-MM-dd').format(pickedDate);
+                            print(
+                                formattedDate); //formatted date output using intl package =>  2021-03-16
+                            setState(() {
+                              dateInput.text =
+                                  formattedDate; //set output date to TextField value.
+                            });
+                          } else {
+                            setState(() {
+                              dateInput.text = "";
+                            });
+                          }
+                        },
+                      )),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(15),
+                          topRight: Radius.circular(15),
+                          bottomLeft: Radius.circular(15),
+                          bottomRight: Radius.circular(15),
+                        ),
+                      ))),
+              Row(
+                children: [
+                  Container(
+                      //
+                      // Figma Flutter Generator Rectangle4Widget - RECTANGLE
+                      margin: EdgeInsets.only(top: 25, left: 20, right: 5),
+                      height: 52,
+                      width: 110,
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 7,
+                          )
+                        ],
+                        color: Colors.white,
+                        border: Border.all(
+                          width: 1,
+                          color: Colors.white,
+                        ),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(5),
+                          topRight: Radius.circular(5),
+                          bottomLeft: Radius.circular(5),
+                          bottomRight: Radius.circular(5),
+                        ),
+                      ),
+                      child: TextFormField(
+                        controller: Quantity,
+                        cursorColor: Color(0xff01579B),
+                        keyboardType: inputType,
+                        decoration: new InputDecoration(
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            errorBorder: InputBorder.none,
+                            disabledBorder: InputBorder.none,
+                            contentPadding: EdgeInsets.only(
+                                left: 15, bottom: 11, top: 11, right: 15),
+                            hintText: "Quantity*"),
+                      )),
+                  Container(
+
+                      margin: EdgeInsets.only(top: 25, bottom: 2),
+                      alignment: Alignment.center,
+                      height: 52,
+                      width: 20,
+                      child: Icon(Icons.close)),
+                  Container(
+                      //
+                      // Figma Flutter Generator Rectangle4Widget - RECTANGLE
+                      margin: EdgeInsets.only(top: 25,  left: 10),
+                      height: 52,
+                      width: 125,
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 7,
+                          )
+                        ],
+                        color: Colors.white,
+                        border: Border.all(
+                          width: 1,
+                          color: Colors.white,
+                        ),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(5),
+                          topRight: Radius.circular(5),
+                          bottomLeft: Radius.circular(5),
+                          bottomRight: Radius.circular(5),
+                        ),
+                      ),
+                      child: TextFormField(
+                        controller: Rate,
+                        cursorColor: Color(0xff01579B),
+                        keyboardType: inputType,
+                        onFieldSubmitted: (_) {
+                          // Force rebuild to update net amount
+                          setState(() {});
+                        },
+                        decoration: new InputDecoration(
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            errorBorder: InputBorder.none,
+                            disabledBorder: InputBorder.none,
+                            contentPadding: EdgeInsets.only(
+                                left: 15, bottom: 11, top: 11, ),
+                            hintText: "Rate Per Unit*"),
+                      )),
+                ],
               ),
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(15),
-                topRight: Radius.circular(15),
-                bottomLeft: Radius.circular(15),
-                bottomRight: Radius.circular(15),
-              )),
-          child: Column(children: [
-            Container(
-                //
-                // Figma Flutter Generator Rectangle4Widget - RECTANGLE
-                margin:
-                    EdgeInsets.only(top: 30, right: 20, left: 20, bottom: 25),
-                height: 52,
-                width: 350,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 7,
-                    )
-                  ],
-                  color: Colors.white,
-                  border: Border.all(
-                    width: 1,
-                    color: Colors.white,
-                  ),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(5),
-                    topRight: Radius.circular(5),
-                    bottomLeft: Radius.circular(5),
-                    bottomRight: Radius.circular(5),
-                  ),
-                ),
-                child: TextFormField(
-                  cursorColor: Color(0xff01579B),
-                  keyboardType: inputType,
-                  decoration: new InputDecoration(
-                      border: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                      enabledBorder: InputBorder.none,
-                      errorBorder: InputBorder.none,
-                      disabledBorder: InputBorder.none,
-                      contentPadding: EdgeInsets.only(
-                          left: 15, bottom: 11, top: 11, right: 15),
-                      hintText: "Client Name*"),
-                )),
-            Container(
+              Container(
 
-                //
-                // Figma Flutter Generator Rectangle4Widget - RECTANGLE
-                margin: EdgeInsets.only(right: 20, left: 20),
-                height: 52,
-                width: 350,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 7,
-                    )
-                  ],
-                  color: Colors.white,
-                  border: Border.all(
-                    width: 1,
+                  // Figma Flutter Generator Rectangle4Widget - RECTANGLE
+                  margin: EdgeInsets.only(top: 25, right: 20, left: 20),
+                  height: 52,
+                  width: 350,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 7,
+                      )
+                    ],
                     color: Colors.white,
-                  ),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(5),
-                    topRight: Radius.circular(5),
-                    bottomLeft: Radius.circular(5),
-                    bottomRight: Radius.circular(5),
-                  ),
-                ),
-                child: TextFormField(
-                  controller: Material,
-                  cursorColor: Color(0xff01579B),
-                  keyboardType: inputType,
-                  decoration: new InputDecoration(
-                      border: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                      enabledBorder: InputBorder.none,
-                      errorBorder: InputBorder.none,
-                      disabledBorder: InputBorder.none,
-                      contentPadding: EdgeInsets.only(
-                          left: 15, bottom: 11, top: 11, right: 15),
-                      hintText: "Material Name*"),
-                )),
-            Container(
-                //
-                // Figma Flutter Generator Rectangle4Widget - RECTANGLE
-                margin: EdgeInsets.only(top: 25, right: 20, left: 20),
-                height: 52,
-                width: 350,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 7,
-                    )
-                  ],
-                  color: Colors.white,
-                  border: Border.all(
-                    width: 1,
-                    color: Colors.white,
-                  ),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(5),
-                    topRight: Radius.circular(5),
-                    bottomLeft: Radius.circular(5),
-                    bottomRight: Radius.circular(5),
-                  ),
-                ),
-                child: Container(
-                    height: 62,
-                    width: 150,
-                    child: Center(
-                        child: TextField(
-                      controller: dateInput,
-
-                      //editing controller of this TextField
-                      decoration: InputDecoration(
-                          icon: Icon(
-                            Icons.calendar_today,
-                            color: Colors.black,
-                          ),
-                          hintText: "Choose Date*",
-                          border: InputBorder.none //icon of text field
-                          //labelText: dateInput.text,//label text of field
-                          ),
-                      readOnly: true,
-                      //set it true, so that user will not able to edit text
-                      onTap: () async {
-                        DateTime? pickedDate = await showDatePicker(
-                            context: context,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime(1950),
-                            //DateTime.now() - not to allow to choose before today.
-                            lastDate: DateTime(2100));
-
-                        if (pickedDate != null) {
-                          print(
-                              pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
-                          String formattedDate =
-                              DateFormat('yyyy-MM-dd').format(pickedDate);
-                          print(
-                              formattedDate); //formatted date output using intl package =>  2021-03-16
-                          setState(() {
-                            dateInput.text =
-                                formattedDate; //set output date to TextField value.
-                          });
-                        } else {
-                          setState(() {
-                            dateInput.text = "";
-                          });
-                        }
-                      },
-                    )),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(15),
-                        topRight: Radius.circular(15),
-                        bottomLeft: Radius.circular(15),
-                        bottomRight: Radius.circular(15),
-                      ),
-                    ))),
-            Row(
-              children: [
-                Container(
-                    //
-                    // Figma Flutter Generator Rectangle4Widget - RECTANGLE
-                    margin: EdgeInsets.only(top: 25, left: 20, right: 5),
-                    height: 52,
-                    width: 110,
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 7,
-                        )
-                      ],
+                    border: Border.all(
+                      width: 1,
                       color: Colors.white,
-                      border: Border.all(
-                        width: 1,
-                        color: Colors.white,
-                      ),
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(5),
-                        topRight: Radius.circular(5),
-                        bottomLeft: Radius.circular(5),
-                        bottomRight: Radius.circular(5),
-                      ),
                     ),
-                    child: TextFormField(
-                      controller: Quantity,
-                      cursorColor: Color(0xff01579B),
-                      keyboardType: inputType,
-                      decoration: new InputDecoration(
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          enabledBorder: InputBorder.none,
-                          errorBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none,
-                          contentPadding: EdgeInsets.only(
-                              left: 15, bottom: 11, top: 11, right: 15),
-                          hintText: "Quantity*"),
-                    )),
-                Container(
-                    //
-                    // Figma Flutter Generator Rectangle4Widget - RECTANGLE
-                    margin: EdgeInsets.only(top: 25, bottom: 2),
-                    alignment: Alignment.center,
-                    height: 52,
-                    width: 20,
-                    child: Icon(Icons.close)),
-                Container(
-                    //
-                    // Figma Flutter Generator Rectangle4Widget - RECTANGLE
-                    margin: EdgeInsets.only(top: 25, right: 20, left: 10),
-                    height: 52,
-                    width: 160,
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 7,
-                        )
-                      ],
-                      color: Colors.white,
-                      border: Border.all(
-                        width: 1,
-                        color: Colors.white,
-                      ),
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(5),
-                        topRight: Radius.circular(5),
-                        bottomLeft: Radius.circular(5),
-                        bottomRight: Radius.circular(5),
-                      ),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(5),
+                      topRight: Radius.circular(5),
+                      bottomLeft: Radius.circular(5),
+                      bottomRight: Radius.circular(5),
                     ),
-                    child: TextFormField(
-                      cursorColor: Color(0xff01579B),
-                      keyboardType: inputType,
-                      decoration: new InputDecoration(
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          enabledBorder: InputBorder.none,
-                          errorBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none,
-                          contentPadding: EdgeInsets.only(
-                              left: 15, bottom: 11, top: 11, right: 15),
-                          hintText: "Rate Per Unit*"),
-                    )),
-              ],
-            ),
-            Container(
+                  ),
+                  child:ValueListenableBuilder(
+                    valueListenable: Quantity,
+                    builder: (context, _, __) {
+                      final quantity = int.tryParse(Quantity.text) ?? 0;
+                      final rate = int.tryParse(Rate.text) ?? 0;
+                      final netAmount = quantity * rate;
 
+                      return Text(
+                        'Net Amount: $netAmount',
+                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Color(0xff01579B)),
+                      );
+                    },
+                  )
+
+              ),
+              Container(
+                //
                 // Figma Flutter Generator Rectangle4Widget - RECTANGLE
-                margin: EdgeInsets.only(top: 25, right: 20, left: 20),
-                height: 52,
-                width: 350,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 7,
-                    )
-                  ],
-                  color: Colors.white,
-                  border: Border.all(
-                    width: 1,
+                  margin: EdgeInsets.only(top: 25, right: 20, left: 20),
+                  height: 52,
+                  width: 350,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 7,
+                      )
+                    ],
                     color: Colors.white,
+                    border: Border.all(
+                      width: 1,
+                      color: Colors.white,
+                    ),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(5),
+                      topRight: Radius.circular(5),
+                      bottomLeft: Radius.circular(5),
+                      bottomRight: Radius.circular(5),
+                    ),
                   ),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(5),
-                    topRight: Radius.circular(5),
-                    bottomLeft: Radius.circular(5),
-                    bottomRight: Radius.circular(5),
-                  ),
-                ),
-                child:
-                Text('Net Amount: ',style:TextStyle(fontSize: 20,fontWeight: FontWeight.w500,color: Color(0xff01579B),
-                )),
-            ),
-            Container(
-              //
-              // Figma Flutter Generator Rectangle4Widget - RECTANGLE
-                margin: EdgeInsets.only(top: 25, right: 20, left: 20),
-                height: 52,
-                width: 350,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 7,
-                    )
-                  ],
-                  color: Colors.white,
-                  border: Border.all(
-                    width: 1,
-                    color: Colors.white,
-                  ),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(5),
-                    topRight: Radius.circular(5),
-                    bottomLeft: Radius.circular(5),
-                    bottomRight: Radius.circular(5),
-                  ),
-                ),
-                child:DropdownButton(
-                    value: value,
-                    items: items.map((String items) {
-                      return DropdownMenuItem(
-                          child: Text(items), value: items);
-                    }).toList(),
-                    onChanged: (String? subha) {
-                      setState(() {
-                        value = subha!;
-                      });
-                    })
-            ),
+                  child:DropdownButton(
+                      value: value,
+                      items: items.map((String items) {
+                        return DropdownMenuItem(
+                            child: Text(items), value: items);
+                      }).toList(),
+                      onChanged: (String? subha) {
+                        setState(() {
+                          value = subha!;
+                        });
+                      })
+              ),
 
-          ]),
+            ]),
+          ),
         ),
         bottomNavigationBar:
         Container(

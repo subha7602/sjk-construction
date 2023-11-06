@@ -28,7 +28,6 @@ class _ComplexState extends State<Complex> {
     return SafeArea(
       child: Scaffold(
 resizeToAvoidBottomInset: false,
-
         body:
         SingleChildScrollView(
           child: Column(
@@ -39,10 +38,10 @@ resizeToAvoidBottomInset: false,
                 )),
               ),
               Container(
-                margin: EdgeInsets.only(left: 20,right: 20,),
+
                 //padding: EdgeInsets.only(top: 25),
                 height: 800,
-                width: MediaQuery.of(context).size.width,
+                width: double.infinity,
                 decoration: BoxDecoration(
                     color: Color(0xff26c0df),
                     border: Border.all(
@@ -554,13 +553,15 @@ flex: 8,                      child: Row(
                         ],
                       ),
                     ),
+
                     Expanded(
                       flex: 8,
                       child: Row(
                         children: [
                           Expanded(
                             flex:3,
-                            child: Container(
+                            child:
+                            Container(
                               padding: EdgeInsets.only(top:20,bottom: 20,left: 10,),
                               child: Text(
                                 'Duration',style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w400),
@@ -589,21 +590,22 @@ flex: 8,                      child: Row(
                                     bottomRight: Radius.circular(5),
                                   ),
                                 ),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(top: 10.0,left: 15,right: 10,bottom: 5),
-                                  child: DropdownButton(
-                                      value: value,
-                                      items: items.map((String items) {
-                                        return DropdownMenuItem(
-                                            child: Text(items), value: items);
-                                      }).toList(),
-                                      onChanged: (String? subha) {
-                                        setState(() {
-                                          value = subha!;
-                                        });
-                                      }),
-                                )
-                               ),
+                                child:
+                                DropdownButton(
+                                    value: value,
+                                    items: items.map((String items) {
+                                      return DropdownMenuItem(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(5.0),
+                                            child: Text(items),
+                                          ), value: items);
+                                    }).toList(),
+                                    onChanged: (String? subha) {
+                                      setState(() {
+                                        value = subha!;
+                                      });
+                                    })
+                            ),
                           ),
                           Expanded(
                             flex: 2,
@@ -660,7 +662,6 @@ flex: 8,                      child: Row(
                             )))),
               ),
 
-              Text('Result : $result'),
             ],
           ),
         ),

@@ -54,7 +54,7 @@ class _LoginState extends State<Login> {
               ),
             ),
             actions: [
-              FlatButton(
+              ElevatedButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -248,65 +248,65 @@ class _LoginState extends State<Login> {
                   ),
                 ),
               ),
-              Expanded(
-                flex: 11,
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex:5,
-                      child: Padding(
-                        padding:EdgeInsets.symmetric(vertical:10.0),
-                        child:Container(
-                          height:1.0,
-                          width:130,
-                          color:Color(0xff1248a3),),),
-                    ),
-                    Expanded(
-                      flex: 1,
-
-                        child: Center(
-                          child: Container(
-                            child: Text('OR'),
-                          ),
-                        ),
-                      ),
-
-                    Expanded(
-                      flex:5,child: Padding(
-                        padding:EdgeInsets.symmetric(vertical:10.0),
-                        child:Container(
-                          height:1.0,
-                          width:130,
-                          color:Color(0xff1248a3),),),
-                    ),
-
-                  ],
-                ),
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: Container(
-                  height: 50,width: 220,
-                  decoration: BoxDecoration(
-
-                      color:Color(0xff1248a3),
-                      borderRadius: BorderRadius.circular(5)
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Row(
-                      children: [
-                        Container(
-                            height:30,width:30,child: Image(image: AssetImage('assets/g1.png'),fit: BoxFit.fill,)),
-                        Padding(
-                          padding: const EdgeInsets.only(left:20,right: 10,),
-                          child: Align(alignment:Alignment.centerRight,child: Text('Log-In with Google',style:TextStyle(color: Colors.white,fontWeight: FontWeight.w500,fontSize: 15))),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              // Expanded(
+              //   flex: 11,
+              //   child: Row(
+              //     children: [
+              //       Expanded(
+              //         flex:5,
+              //         child: Padding(
+              //           padding:EdgeInsets.symmetric(vertical:10.0),
+              //           child:Container(
+              //             height:1.0,
+              //             width:130,
+              //             color:Color(0xff1248a3),),),
+              //       ),
+              //       Expanded(
+              //         flex: 1,
+              //
+              //           child: Center(
+              //             child: Container(
+              //               child: Text('OR'),
+              //             ),
+              //           ),
+              //         ),
+              //
+              //       Expanded(
+              //         flex:5,child: Padding(
+              //           padding:EdgeInsets.symmetric(vertical:10.0),
+              //           child:Container(
+              //             height:1.0,
+              //             width:130,
+              //             color:Color(0xff1248a3),),),
+              //       ),
+              //
+              //     ],
+              //   ),
+              // ),
+              // Align(
+              //   alignment: Alignment.center,
+              //   child: Container(
+              //     height: 50,width: 220,
+              //     decoration: BoxDecoration(
+              //
+              //         color:Color(0xff1248a3),
+              //         borderRadius: BorderRadius.circular(5)
+              //     ),
+              //     child: Padding(
+              //       padding: const EdgeInsets.all(12.0),
+              //       child: Row(
+              //         children: [
+              //           Container(
+              //               height:30,width:30,child: Image(image: AssetImage('assets/g1.png'),fit: BoxFit.fill,)),
+              //           Padding(
+              //             padding: const EdgeInsets.only(left:20,right: 10,),
+              //             child: Align(alignment:Alignment.centerRight,child: Text('Log-In with Google',style:TextStyle(color: Colors.white,fontWeight: FontWeight.w500,fontSize: 15))),
+              //           ),
+              //         ],
+              //       ),
+              //     ),
+              //   ),
+              // ),
               Row(
                 children: [
                   Padding(

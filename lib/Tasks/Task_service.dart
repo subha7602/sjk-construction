@@ -14,6 +14,7 @@ class Task_service extends StatefulWidget {
 class _Task_serviceState extends State<Task_service> {
 
   List data2 =[];
+  List<String> value=[];
   Future<void> fetchdata()async {
     var Collection=await FirebaseFirestore.instance.collection("task").get();
 
@@ -36,7 +37,10 @@ class _Task_serviceState extends State<Task_service> {
   }
   @override
   Widget build(BuildContext context) {
-    return service2?Data2(data2:data2):Center(child:Text('loading....'));
+    return Scaffold(
+      body: service2?Data2(data2:data2,value:value):Center(child:Image.asset('assets/loading.gif')),
+    );
+
   }
 }
 
