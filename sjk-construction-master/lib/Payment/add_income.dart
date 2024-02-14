@@ -14,13 +14,13 @@ class Add_Income extends StatefulWidget {
 }
 
 class _Add_IncomeState extends State<Add_Income> {
-  TextEditingController dateInput = new TextEditingController();
-  TextEditingController amount = new TextEditingController();
-  TextEditingController description = new TextEditingController();
+  TextEditingController dateInput =  TextEditingController();
+  TextEditingController amount =  TextEditingController();
+  TextEditingController description =  TextEditingController();
   void submit() {
-    dateInput.text.length == 0
+    dateInput.text.isEmpty
         ? toast('Select Date', Colors.red)
-        : amount.text.length == 0
+        : amount.text.isEmpty
             ? toast('Enter amount', Colors.red)
             : enterdata();
   }
@@ -58,22 +58,22 @@ class _Add_IncomeState extends State<Add_Income> {
 
   @override
   Widget build(BuildContext context) {
-    var inputType;
+    //var inputType;
     return SafeArea(
       child: Scaffold(
 
           body: Center(
             child: Container(
-              margin: EdgeInsets.all(20),
+              margin:const EdgeInsets.all(20),
               height: 400,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
-                  color: Color(0xffe6f2ff),
+                  color: const Color(0xffe6f2ff),
                   border: Border.all(
                     width: 3,
-                    color: Color(0xff01579B),
+                    color: const  Color(0xff01579B),
                   ),
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(15),
                     topRight: Radius.circular(15),
                     bottomLeft: Radius.circular(15),
@@ -81,11 +81,11 @@ class _Add_IncomeState extends State<Add_Income> {
                   )),
               child: Column(children: [
                 Container(
-                    margin: EdgeInsets.all(20),
+                    margin: const EdgeInsets.all(20),
                     height: 40,
                     width: 380,
                     decoration: BoxDecoration(
-                      boxShadow: [
+                      boxShadow:const  [
                         BoxShadow(
                           blurRadius: 7,
                         )
@@ -95,7 +95,7 @@ class _Add_IncomeState extends State<Add_Income> {
                         width: 1,
                         color: Colors.white,
                       ),
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(5),
                         topRight: Radius.circular(5),
                         bottomLeft: Radius.circular(5),
@@ -105,12 +105,20 @@ class _Add_IncomeState extends State<Add_Income> {
                     child: Container(
                         height: 62,
                         width: 150,
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(15),
+                            topRight: Radius.circular(15),
+                            bottomLeft: Radius.circular(15),
+                            bottomRight: Radius.circular(15),
+                          ),
+                        ),
                         child: Center(
                             child: TextField(
                           controller: dateInput,
 
                           //editing controller of this TextField
-                          decoration: InputDecoration(
+                          decoration:const  InputDecoration(
                               icon: Icon(
                                 Icons.calendar_today,
                                 color: Colors.black,
@@ -146,23 +154,15 @@ class _Add_IncomeState extends State<Add_Income> {
                               });
                             }
                           },
-                        )),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(15),
-                            topRight: Radius.circular(15),
-                            bottomLeft: Radius.circular(15),
-                            bottomRight: Radius.circular(15),
-                          ),
-                        ))),
+                        )))),
                 Container(
                     //
                     // Figma Flutter Generator Rectangle4Widget - RECTANGLE
-                    margin: EdgeInsets.all(20),
+                    margin: const EdgeInsets.all(20),
                     height: 32,
                     width: 350,
                     decoration: BoxDecoration(
-                      boxShadow: [
+                      boxShadow: const [
                         BoxShadow(
                           blurRadius: 7,
                         )
@@ -172,7 +172,7 @@ class _Add_IncomeState extends State<Add_Income> {
                         width: 1,
                         color: Colors.white,
                       ),
-                      borderRadius: BorderRadius.only(
+                      borderRadius:const  BorderRadius.only(
                         topLeft: Radius.circular(5),
                         topRight: Radius.circular(5),
                         bottomLeft: Radius.circular(5),
@@ -181,9 +181,9 @@ class _Add_IncomeState extends State<Add_Income> {
                     ),
                     child: TextFormField(
                       controller: amount,
-                      cursorColor: Color(0xff01579B),
+                      cursorColor: const Color(0xff01579B),
                       keyboardType: TextInputType.number,
-                      decoration: new InputDecoration(
+                      decoration: const  InputDecoration(
                           border: InputBorder.none,
                           focusedBorder: InputBorder.none,
                           enabledBorder: InputBorder.none,
@@ -196,11 +196,11 @@ class _Add_IncomeState extends State<Add_Income> {
                 Container(
                     //
                     // Figma Flutter Generator Rectangle4Widget - RECTANGLE
-                    margin: EdgeInsets.all(20),
+                    margin: const EdgeInsets.all(20),
                     height: 62,
                     width: 350,
                     decoration: BoxDecoration(
-                      boxShadow: [
+                      boxShadow: const [
                         BoxShadow(
                           blurRadius: 7,
                         )
@@ -210,7 +210,7 @@ class _Add_IncomeState extends State<Add_Income> {
                         width: 1,
                         color: Colors.white,
                       ),
-                      borderRadius: BorderRadius.only(
+                      borderRadius:const  BorderRadius.only(
                         topLeft: Radius.circular(5),
                         topRight: Radius.circular(5),
                         bottomLeft: Radius.circular(5),
@@ -219,9 +219,9 @@ class _Add_IncomeState extends State<Add_Income> {
                     ),
                     child: TextFormField(
                       controller: description,
-                      cursorColor: Color(0xff01579B),
-                      keyboardType: inputType,
-                      decoration: new InputDecoration(
+                      cursorColor: const Color(0xff01579B),
+                      keyboardType: TextInputType.name,
+                      decoration: const  InputDecoration(
                           border: InputBorder.none,
                           focusedBorder: InputBorder.none,
                           enabledBorder: InputBorder.none,
@@ -242,32 +242,30 @@ class _Add_IncomeState extends State<Add_Income> {
               color: Colors.white30,
               child:
                   Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Container(
-                  child: Center(
-                      child: GestureDetector(
-                    onTap: () {
-                      submit();
-                    },
-                    child: Container(
-                        margin: EdgeInsets.all(20),
-                        height: 50,
-                        width: 100,
-                        decoration: BoxDecoration(
-                            color: Color(0xff01579B),
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(12),
-                              topRight: Radius.circular(12),
-                              bottomLeft: Radius.circular(12),
-                              bottomRight: Radius.circular(12),
-                            )),
-                        alignment: Alignment.center,
-                        child: Text("SAVE",
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white))),
-                  )),
-                ),
+                Center(
+                    child: GestureDetector(
+                  onTap: () {
+                    submit();
+                  },
+                  child: Container(
+                      margin:const  EdgeInsets.all(20),
+                      height: 50,
+                      width: 100,
+                      decoration:const  BoxDecoration(
+                          color: Color(0xff01579B),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(12),
+                            topRight: Radius.circular(12),
+                            bottomLeft: Radius.circular(12),
+                            bottomRight: Radius.circular(12),
+                          )),
+                      alignment: Alignment.center,
+                      child:const  Text("SAVE",
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white))),
+                )),
               ]))),
     );
   }
